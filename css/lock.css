@@ -8,6 +8,9 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 50%, #ffd1dc 100%);
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
 }
@@ -33,19 +36,10 @@ body::before {
     position: relative;
     z-index: 1;
     transition: all 0.8s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
 }
 
 .lock-screen.unlocking {
     animation: unlockScreen 0.8s ease forwards;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 @keyframes unlockScreen {
@@ -407,7 +401,6 @@ body::before {
 @media (max-width: 480px) {
     .lock-screen {
         padding: 1.5rem;
-        min-height: 100vh;
     }
 
     .title {
