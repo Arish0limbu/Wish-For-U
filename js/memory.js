@@ -1,100 +1,78 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const herPhotos = [
-        '1762152940423.jpg', 'IMG_20231025_142706.jpg', 'IMG_20240105_042024.jpg', 'IMG_20240617_150114.jpg',
-        'IMG_20250727_195434.jpg', 'IMG_20250830_114855.jpg', 'IMG_20251028_223910.jpg', 'IMG-20240610-WA0006.jpg',
-        'IMG-20251027-WA0007.jpg', 'Messenger_creation_497535565702143.jpeg', 'received_3334225633313265.jpeg',
-        'Screenshot_2025-11-19-22-55-52-980_com.whatsapp.jpg', 'Snapchat-1691040329.jpg'
+    const pairs = [
+        { you: 'IMG-20240617-WA0002.jpg', us: 'IMG-20241203-WA0009.jpg', youCaption: 'A little moment we shared', usCaption: 'Another memory of us', title: 'From one shared moment to another', text: 'Two photos of us, connected by all the little moments in between.' },
+        { you: 'IMG-20241203-WA0001.jpg', us: 'IMG-20241203-WA0011.jpg', youCaption: 'Side by side', usCaption: 'A day to remember', title: 'Two frames, one story', text: 'A pair of memories from the time we have spent together.' },
+        { you: 'IMG_20250217_060210.jpg', us: 'IMG_20250311_153100.jpg', youCaption: 'A favorite moment together', usCaption: 'Another little adventure', title: 'A little closer', text: 'Every photo holds a small piece of our story.' },
+        { you: 'IMG_20250402_215557.jpg', us: 'IMG_20250424_210033.jpg', youCaption: 'One shared chapter', usCaption: 'A memory to keep', title: 'One moment finds another', text: 'Different days, tied together by all the moments between them.' },
+        { you: 'IMG_20250527_165106.jpg', us: 'IMG_20250830_160907.jpg', youCaption: 'A photo to come back to', usCaption: 'Us making another memory', title: 'A favorite kind of connection', text: 'Two snapshots from the story we keep making together.' },
+        { you: 'IMG-20251023-WA0011.jpg', us: 'Snapchat-2102383121.jpg', youCaption: 'A smile we shared', usCaption: 'One for the scrapbook', title: 'The story keeps going', text: 'A reminder that the best memories are the ones we make together.' }
     ];
-    const usPhotos = [
-        'IMG_20250217_060210.jpg', 'IMG_20250311_153100.jpg', 'IMG_20250402_215557.jpg', 'IMG_20250424_210033.jpg',
-        'IMG_20250527_165106.jpg', 'IMG_20250830_160907.jpg', 'IMG-20240617-WA0002.jpg', 'IMG-20241203-WA0001.jpg',
-        'IMG-20241203-WA0009.jpg', 'IMG-20241203-WA0011.jpg', 'IMG-20251023-WA0011.jpg', 'Snapchat-2102383121.jpg'
-    ];
-    const herCaptions = ['A little moment of you', 'A smile to keep', 'One of your lovely days', 'A favorite frame', 'Just being you', 'A moment in your own light'];
-    const usCaptions = ['A memory we share', 'Together in a favorite frame', 'One for the scrapbook', 'A little moment for us', 'A day worth keeping', 'A photo to come back to'];
-    const photos = [];
-    herPhotos.forEach(function (file, index) {
-        photos.push({ src: 'images/herpic/' + file, group: 'her', caption: herCaptions[index % herCaptions.length], alt: 'A photo from the personal album' });
-    });
-    usPhotos.forEach(function (file, index) {
-        photos.push({ src: 'images/ourpic/' + file, group: 'us', caption: usCaptions[index % usCaptions.length], alt: 'A photo of the two of you together' });
-    });
 
-    const grid = document.getElementById('memory-grid');
-    const count = document.getElementById('gallery-count');
-    const filterButtons = Array.from(document.querySelectorAll('.filter-chip'));
-    const dialog = document.getElementById('photo-lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    let visiblePhotos = photos.slice();
-    let activeIndex = 0;
+    const stage = document.getElementById('memory-pair');
+    const youImage = document.getElementById('memory-you-image');
+    const usImage = document.getElementById('memory-us-image');
+    const youCaption = document.getElementById('memory-you-caption');
+    const usCaption = document.getElementById('memory-us-caption');
+    const title = document.getElementById('pair-title');
+    const description = document.getElementById('pair-description');
+    const counter = document.getElementById('pair-counter');
+    const dots = document.getElementById('pair-dots');
+    const playButton = document.getElementById('pair-play');
+    let current = 0;
+    let transitionTimer;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let playing = !prefersReducedMotion;
+    let timer;
 
-    function renderGrid(filter) {
-        visiblePhotos = filter === 'all' ? photos.slice() : photos.filter(function (photo) { return photo.group === filter; });
-        grid.replaceChildren();
-        visiblePhotos.forEach(function (photo, index) {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.className = 'memory-card';
-            button.setAttribute('aria-label', 'Open photo ' + (index + 1) + ': ' + photo.caption);
-            const image = document.createElement('img');
-            image.src = photo.src;
-            image.alt = photo.alt;
-            image.loading = 'lazy';
-            image.decoding = 'async';
-            const caption = document.createElement('div');
-            caption.className = 'memory-caption';
-            const title = document.createElement('span');
-            title.textContent = photo.caption;
-            const marker = document.createElement('span');
-            marker.textContent = photo.group === 'her' ? 'YOU' : 'US';
-            caption.append(title, marker);
-            button.append(image, caption);
-            button.addEventListener('click', function () { openPhoto(index); });
-            grid.append(button);
-        });
-        count.textContent = visiblePhotos.length + (visiblePhotos.length === 1 ? ' photo' : ' photos');
-    }
+    function showPair(index, animate) {
+        current = (index + pairs.length) % pairs.length;
+        const pair = pairs[current];
+        if (animate) {
+            stage.classList.add('is-changing');
+            window.clearTimeout(transitionTimer);
+            transitionTimer = window.setTimeout(updatePair, 260);
+        } else {
+            updatePair();
+        }
 
-    function showCurrentPhoto() {
-        const photo = visiblePhotos[activeIndex];
-        if (!photo) return;
-        lightboxImage.src = photo.src;
-        lightboxImage.alt = photo.alt;
-        lightboxCaption.textContent = photo.caption + (photo.group === 'her' ? ' · just you' : ' · together');
-    }
-
-    function openPhoto(index) {
-        activeIndex = index;
-        showCurrentPhoto();
-        if (!dialog.open) dialog.showModal();
-    }
-
-    function movePhoto(step) {
-        activeIndex = (activeIndex + step + visiblePhotos.length) % visiblePhotos.length;
-        showCurrentPhoto();
-    }
-
-    filterButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            filterButtons.forEach(function (chip) {
-                chip.classList.remove('is-active');
-                chip.setAttribute('aria-pressed', 'false');
+        function updatePair() {
+            youImage.src = 'images/ourpic/' + pair.you;
+            usImage.src = 'images/ourpic/' + pair.us;
+            youCaption.textContent = pair.youCaption;
+            usCaption.textContent = pair.usCaption;
+            title.textContent = pair.title;
+            description.textContent = pair.text;
+            counter.innerHTML = String(current + 1).padStart(2, '0') + ' <span>/ ' + String(pairs.length).padStart(2, '0') + '</span>';
+            Array.from(dots.children).forEach(function (dot, dotIndex) {
+                dot.setAttribute('aria-current', String(dotIndex === current));
             });
-            button.classList.add('is-active');
-            button.setAttribute('aria-pressed', 'true');
-            renderGrid(button.dataset.filter);
-        });
-    });
-    document.getElementById('lightbox-close').addEventListener('click', function () { dialog.close(); });
-    document.getElementById('lightbox-prev').addEventListener('click', function () { movePhoto(-1); });
-    document.getElementById('lightbox-next').addEventListener('click', function () { movePhoto(1); });
-    dialog.addEventListener('click', function (event) { if (event.target === dialog) dialog.close(); });
-    document.addEventListener('keydown', function (event) {
-        if (!dialog.open) return;
-        if (event.key === 'ArrowLeft') movePhoto(-1);
-        if (event.key === 'ArrowRight') movePhoto(1);
+            stage.classList.remove('is-changing');
+        }
+    }
+
+    function nextPair() { showPair(current + 1, true); }
+    function setPlaying(nextState) {
+        playing = nextState;
+        playButton.setAttribute('aria-pressed', String(playing));
+        playButton.setAttribute('aria-label', playing ? 'Pause memory animation' : 'Play memory animation');
+        playButton.querySelector('span').textContent = playing ? 'Ⅱ' : '▶';
+        window.clearInterval(timer);
+        if (playing) timer = window.setInterval(nextPair, 5200);
+    }
+
+    pairs.forEach(function (_, index) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'pair-dot';
+        dot.setAttribute('aria-label', 'Show memory pair ' + (index + 1));
+        dot.setAttribute('aria-current', String(index === 0));
+        dot.addEventListener('click', function () { showPair(index, true); });
+        dots.append(dot);
     });
 
-    renderGrid('all');
+    document.getElementById('pair-previous').addEventListener('click', function () { showPair(current - 1, true); });
+    document.getElementById('pair-next').addEventListener('click', nextPair);
+    playButton.addEventListener('click', function () { setPlaying(!playing); });
+    showPair(0, false);
+    setPlaying(playing);
 });

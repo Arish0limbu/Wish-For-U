@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fcebec">
-    <title>Our Memories</title>
+    <title>Memories, Connected</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -16,36 +16,54 @@
         <a class="brand" href="home.html"><span class="brand-heart" aria-hidden="true">♥</span><span>Happy Birthday</span></a>
         <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
         <nav class="menu-panel" id="site-menu" aria-label="Main navigation" hidden>
-            <a href="home.html">Home</a><a href="wish.html">Birthday wishes</a><a href="memory.html" aria-current="page">Memories</a><a href="home.html#music">Playlist</a><a href="our-story.html">Our story</a><a href="love-letter.html">Love letter</a><a href="surprise.html">Surprise</a>
+            <a href="home.html">Home</a><a href="wish.html">Birthday wishes</a><a href="memory.html" aria-current="page">Memories</a><a href="gallery.html">Gallery</a><a href="home.html#music">Playlist</a><a href="our-story.html">Our story</a><a href="love-letter.html">Love letter</a><a href="surprise.html">Surprise</a>
         </nav>
     </header>
     <main class="page-shell memory-shell">
         <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
         <header class="page-heading">
-            <p class="page-kicker">Little moments, kept close</p>
-            <h1 class="page-title">Our Memories</h1>
-            <p class="page-intro">A scrapbook of your favorite photos and the moments we share.</p>
+            <p class="page-kicker">One little moment leads to another</p>
+            <h1 class="page-title">Memories</h1>
+            <p class="page-intro">A pair of photos, joined by all the moments in between.</p>
             <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
         </header>
-        <div class="gallery-toolbar">
-            <div class="gallery-filters" role="group" aria-label="Filter the photo scrapbook">
-                <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All moments</button>
-                <button class="filter-chip" type="button" data-filter="her" aria-pressed="false">Just you</button>
-                <button class="filter-chip" type="button" data-filter="us" aria-pressed="false">Us together</button>
+
+        <section class="memory-experience" id="memory-experience" aria-label="Animated connected photo memories">
+            <div class="memory-pair" id="memory-pair">
+                <article class="pair-photo pair-photo-you">
+                    <span class="pair-label">Us <span aria-hidden="true">♡</span></span>
+                    <figure class="pair-frame"><img id="memory-you-image" src="images/ourpic/IMG-20240617-WA0002.jpg" alt="A photo of the two of you together"><figcaption id="memory-you-caption">A little moment we shared</figcaption></figure>
+                </article>
+                <div class="pair-thread" aria-hidden="true">
+                    <svg viewBox="0 0 100 180" preserveAspectRatio="none">
+                        <path class="thread-path-soft" d="M4 90 C 28 15, 70 165, 96 90"/>
+                        <path class="thread-path" id="thread-path" d="M4 90 C 28 15, 70 165, 96 90"/>
+                        <circle class="thread-orbit" r="4"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#thread-path"/></animateMotion></circle>
+                    </svg>
+                    <span class="thread-heart">♥</span>
+                </div>
+                <article class="pair-photo pair-photo-us">
+                    <span class="pair-label">Us, again <span aria-hidden="true">♥</span></span>
+                    <figure class="pair-frame"><img id="memory-us-image" src="images/ourpic/IMG-20241203-WA0009.jpg" alt="Another photo of the two of you together"><figcaption id="memory-us-caption">Another memory of us</figcaption></figure>
+                </article>
             </div>
-            <p id="gallery-count" aria-live="polite"></p>
-        </div>
-        <section class="memory-grid" id="memory-grid" aria-label="Photo scrapbook"></section>
-        <dialog class="photo-lightbox" id="photo-lightbox" aria-label="Photo viewer">
-            <div class="lightbox-frame">
-                <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close photo">×</button>
-                <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" type="button" aria-label="Previous photo">‹</button>
-                <figure><img id="lightbox-image" src="" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
-                <button class="lightbox-arrow lightbox-next" id="lightbox-next" type="button" aria-label="Next photo">›</button>
+            <div class="pair-story">
+                <p class="pair-counter" id="pair-counter">01 <span>/ 06</span></p>
+                <h2 id="pair-title">From one shared moment to another</h2>
+                <p id="pair-description">Two photos of us, connected by all the little moments in between.</p>
             </div>
-        </dialog>
+            <div class="pair-controls">
+                <button class="pair-nav" id="pair-previous" type="button" aria-label="Previous memory pair">←</button>
+                <div class="pair-dots" id="pair-dots" role="group" aria-label="Choose a memory pair"></div>
+                <button class="pair-play" id="pair-play" type="button" aria-pressed="true" aria-label="Pause memory animation"><span aria-hidden="true">Ⅱ</span></button>
+                <button class="pair-nav" id="pair-next" type="button" aria-label="Next memory pair">→</button>
+            </div>
+            <p class="memory-hint">The photos change together. Pause anytime to linger on a moment.</p>
+        </section>
+
+        <div class="memory-gallery-link"><span>Want to see every photo?</span><a class="pill-link" href="gallery.html">Open the Gallery <span aria-hidden="true">→</span></a></div>
     </main>
-    <footer class="site-footer"><p>Some moments deserve their own little place <span aria-hidden="true">♥</span></p></footer>
+    <footer class="site-footer"><p>One moment connected to the next <span aria-hidden="true">♥</span></p></footer>
     <script src="js/main.js"></script>
     <script src="js/memory.js"></script>
 </body>
