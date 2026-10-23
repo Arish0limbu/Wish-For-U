@@ -3,23 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wish For U</title>
+    <title>Happy Birthday</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>Wish For U</h1>
-        <p>A special place for someone special</p>
-        <nav>
-            <a href="wish.html">Wishes</a>
-            <a href="memory.html">Memories</a>
-            <a href="love-letter.html">Love Letter</a>
-            <a href="our-story.html">Our Story</a>
-            <a href="surprise.html">Surprise</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <span class="header-heart">❤</span>
+            <span class="header-title">Happy Birthday</span>
+        </div>
+        <nav class="header-nav">
+            <a href="home.html" class="nav-link active">Home</a>
+            <a href="wish.html" class="nav-link">Wish</a>
+            <a href="memory.html" class="nav-link">Memories</a>
+            <a href="#" class="nav-link">Music</a>
+            <a href="#" class="nav-link">Gallery</a>
         </nav>
-    </div>
+        <div class="header-right">
+            <span class="header-heart">❤</span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-heart">❤</span>
+                Happy Birthday
+                <span class="title-heart">❤</span>
+            </h1>
+            <h2 class="hero-subtitle">TO MY SPECIAL GIRL ❤</h2>
+            <p class="hero-text">
+                May your day be filled with all the happiness you give to others. You deserve everything beautiful in this world.
+            </p>
+            <button class="hero-button">Explore Your Day →</button>
+        </div>
+        <div class="hero-images">
+            <div class="hero-image-wrapper">
+                <img src="images/flower-bouquet.jpg" alt="Flower Bouquet" class="hero-main-image">
+            </div>
+            <div class="hero-small-images">
+                <img src="images/birthday-cake.jpg" alt="Birthday Cake" class="hero-small-image">
+                <div class="hero-card">
+                    <p class="hero-card-text">You make life more beautiful ❤</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <div class="card">
+            <div class="card-icon">🎁</div>
+            <h3 class="card-title">Wish</h3>
+            <p class="card-description">Read my special wishes for you</p>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">📸</div>
+            <h3 class="card-title">Memories</h3>
+            <p class="card-description">Our beautiful moments</p>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">🎵</div>
+            <h3 class="card-title">Music</h3>
+            <p class="card-description">Your playlist of happiness</p>
+            <span class="card-arrow">→</span>
+        </div>
+        <div class="card">
+            <div class="card-icon">🖼️</div>
+            <h3 class="card-title">Gallery</h3>
+            <p class="card-description">Photos & moments we share</p>
+            <span class="card-arrow">→</span>
+        </div>
+    </section>
+
+    <!-- Just for You Section -->
+    <section class="just-for-you">
+        <h2 class="just-for-you-title">Just for You ❤</h2>
+        <p class="just-for-you-text">
+            On your special day, I just want to know how much you mean to me. You are my happiness, my peace, and my favorite chapter in life. Keep smiling, keep being you, because you are truly amazing.
+        </p>
+        <div class="just-for-you-signature">
+            <p class="signature-text">Happy Birthday, Budi ❤</p>
+            <p class="signature-text">— Always, Arish ❤</p>
+        </div>
+    </section>
+
+    <!-- Music Player Section -->
+    <section class="music-player">
+        <div class="music-player-header">
+            <div class="music-thumbnail">
+                <img src="images/music-thumbnail.jpg" alt="Music Thumbnail">
+            </div>
+            <div class="music-info">
+                <h3 class="music-title">Your Special Playlist</h3>
+                <p class="music-subtitle">10 songs for your special day ❤</p>
+            </div>
+        </div>
+        <div class="music-progress">
+            <span class="progress-time">0:00</span>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <span class="progress-time">3:45</span>
+        </div>
+        <div class="music-controls">
+            <button class="control-btn">🔀</button>
+            <button class="control-btn">⏮️</button>
+            <button class="play-btn">▶️</button>
+            <button class="control-btn">⏭️</button>
+            <button class="control-btn">🔁</button>
+        </div>
+        <p class="music-footer">Press play and smile ❤</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Another year, more dreams, more happiness ❤</p>
+    </footer>
+
     <script src="js/main.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/home.js"></script>
 </body>
 </html>
