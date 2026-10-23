@@ -332,44 +332,105 @@ button { font: inherit; }
     .brand { font-size: 1.65rem; gap: .5rem; }
     .brand-heart { font-size: 1.3rem; }
     .menu-toggle { transform: scale(.88); transform-origin: right center; }
-    .hero { min-height: 0; padding: 2rem 1.25rem .8rem; display: flex; flex-direction: column; gap: .25rem; text-align: center; }
+    .hero { min-height: 0; padding: 1.1rem 1rem .45rem; display: flex; flex-direction: column; gap: 0; text-align: center; }
     .hero-content { width: 100%; padding: 0; }
-    .eyebrow { margin-bottom: .75rem; font-size: .83rem; letter-spacing: .12em; }
-    .hero-title { font-size: clamp(5rem, 19vw, 7.4rem); line-height: .82; }
-    .title-flourish { width: 150px; margin: .65rem auto .65rem; }
+    .eyebrow { margin-bottom: .45rem; font-size: .75rem; letter-spacing: .1em; }
+    .hero-title { font-size: clamp(4rem, 16vw, 6.2rem); line-height: .84; }
+    .title-flourish { width: 132px; height: 24px; margin: .4rem auto .35rem; font-size: 1.8rem; }
     .title-flourish span { width: 43px; }
-    .hero-copy { max-width: 390px; margin: .55rem auto 1rem; font-size: .95rem; line-height: 1.7; }
+    .hero-copy { max-width: 390px; margin: .35rem auto .7rem; font-size: .88rem; line-height: 1.55; }
     .desktop-break { display: none; }
-    .primary-button { min-width: 225px; min-height: 50px; font-size: .95rem; }
-    .hero-art { width: min(100%, 500px); margin: -.3rem auto 0; }
-    .hero-art img { width: 100%; max-width: 480px; }
-    .floating-heart-one { top: 48%; left: 4%; font-size: 2rem; }
-    .floating-heart-two { top: 39%; right: 5%; }
-    .floating-heart-three { bottom: 2%; left: 9%; font-size: 1.9rem; }
-    .floating-heart-four { bottom: 4%; right: 9%; font-size: 1.8rem; }
-    .features { width: min(calc(100% - 1.7rem), 480px); margin-top: .35rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .15rem .5rem; }
-    .feature-card { min-height: 185px; padding-top: .85rem; }
-    .feature-icon { width: 40px; height: 40px; }
-    .feature-title { font-size: 1.5rem; }
-    .feature-copy { margin-top: .5rem; font-size: .83rem; }
-    .heartfelt-row { width: 100%; margin-top: .6rem; padding: 1.4rem 1.3rem 1.7rem; grid-template-columns: 1fr; gap: 1.55rem; }
+    .primary-button { min-width: 205px; min-height: 45px; padding: .6rem 1.15rem; font-size: .88rem; }
+    .hero-art { width: min(88%, 350px); margin: -.1rem auto 0; }
+    .hero-art img { width: 100%; max-width: 350px; }
+    .floating-heart-one { top: 45%; left: 4%; font-size: 1.7rem; }
+    .floating-heart-two { top: 38%; right: 5%; font-size: 1.8rem; }
+    .floating-heart-three { bottom: 1%; left: 9%; font-size: 1.6rem; }
+    .floating-heart-four { bottom: 2%; right: 9%; font-size: 1.6rem; }
+    .features { width: min(calc(100% - 1.5rem), 460px); margin-top: .1rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .35rem; }
+    .feature-card { min-height: 160px; padding: .55rem .35rem .45rem; }
+    .feature-icon { width: 34px; height: 34px; margin-bottom: .3rem; }
+    .feature-title { font-size: 1.35rem; }
+    .feature-copy { min-height: 42px; margin-top: .35rem; font-size: .75rem; line-height: 1.45; }
+    .feature-arrow { margin-top: 0; font-size: 1.4rem; }
+    .heartfelt-row { width: 100%; margin-top: .25rem; padding: 1rem 1rem 1.2rem; grid-template-columns: 1fr; gap: 1rem; }
     .heartfelt-note { text-align: center; }
-    .heartfelt-note h2 { font-size: 3.3rem; }
-    .note-underline { width: 145px; margin: .5rem auto 1rem; }
-    .heartfelt-note > p:not(.birthday-signoff):not(.signature) { font-size: .96rem; line-height: 1.8; }
-    .birthday-signoff { font-size: 1.9rem; }
-    .music-player { max-width: 440px; min-height: 0; margin: 0 auto; padding: 1.25rem 1.25rem 1.1rem; border-radius: 23px; }
-    .player-heading { min-height: 82px; }
-    .album-art { width: 78px; height: 78px; flex-basis: 78px; border-radius: 14px; }
-    .playlist-title { font-size: 1.4rem; }
+    .heartfelt-note h2 { font-size: 2.8rem; }
+    .note-underline { width: 125px; margin: .4rem auto .7rem; }
+    .heartfelt-note > p:not(.birthday-signoff):not(.signature) { font-size: .88rem; line-height: 1.65; }
+    .birthday-signoff { margin: .8rem 0 .45rem; font-size: 1.7rem; }
+    .signature { font-size: .88rem; }
+    .music-player { max-width: 420px; min-height: 0; margin: 0 auto; padding: 1rem 1rem .85rem; border-radius: 21px; }
+    .player-heading { min-height: 74px; }
+    .album-art { width: 68px; height: 68px; flex-basis: 68px; border-radius: 13px; }
+    .playlist-title { font-size: 1.25rem; }
     .playlist-subtitle { font-size: .73rem; }
     .track-name { font-size: .68rem; }
-    .player-progress { margin-top: .9rem; }
+    .player-progress { margin-top: .7rem; }
     .player-controls { gap: .25rem; }
     .control-button { width: 32px; }
     .control-button svg { width: 21px; height: 21px; }
-    .play-button { width: 60px; height: 60px; flex-basis: 60px; }
-    .site-footer { min-height: 130px; padding-bottom: 1.8rem; font-size: .82rem; }
+    .play-button { width: 54px; height: 54px; flex-basis: 54px; }
+    .player-footer { margin-top: .45rem; font-size: .95rem; }
+    .site-footer { min-height: 105px; padding-bottom: 1.3rem; font-size: .78rem; }
+}
+
+@media (min-width: 360px) and (max-width: 720px) {
+    .hero {
+        padding: 1rem .8rem .35rem;
+        display: grid;
+        grid-template-columns: minmax(0, .94fr) minmax(0, 1.06fr);
+        align-items: center;
+        gap: .15rem;
+        text-align: left;
+    }
+    .hero-content { width: auto; }
+    .eyebrow { margin-bottom: .45rem; font-size: .62rem; letter-spacing: .035em; white-space: normal; }
+    .hero-title { font-size: clamp(2.8rem, 12vw, 4.2rem); line-height: .86; }
+    .title-flourish { width: 100px; height: 20px; margin: .35rem 0 .35rem .4rem; font-size: 1.5rem; }
+    .title-flourish span { width: 34px; }
+    .hero-copy { margin: .35rem 0 .65rem; font-size: .68rem; line-height: 1.5; }
+    .primary-button { min-width: 0; min-height: 39px; padding: .5rem .65rem; gap: .5rem; font-size: .68rem; }
+    .primary-button span { font-size: 1.15rem; }
+    .hero-art { width: 100%; margin: 0; }
+    .hero-art img { width: 112%; max-width: none; }
+    .floating-heart-one { top: 37%; left: 46%; }
+    .floating-heart-two { top: 19%; right: 3%; }
+    .floating-heart-three { bottom: 2%; left: 5%; }
+    .floating-heart-four { bottom: 3%; right: 5%; }
+    .features { width: calc(100% - 1rem); grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
+    .feature-card { min-height: 145px; padding: .45rem .1rem .35rem; }
+    .feature-icon { width: 30px; height: 30px; }
+    .feature-title { font-size: 1.2rem; }
+    .feature-copy { min-height: 44px; margin-top: .3rem; font-size: .63rem; line-height: 1.4; }
+    .feature-arrow { font-size: 1.3rem; }
+    .heartfelt-row {
+        width: 100%;
+        padding: 1rem .75rem 1.2rem;
+        grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+        align-items: center;
+        gap: .65rem;
+    }
+    .heartfelt-note { text-align: left; }
+    .heartfelt-note h2 { font-size: 2.25rem; }
+    .note-underline { width: 105px; margin: .35rem 0 .65rem 1.2rem; }
+    .heartfelt-note > p:not(.birthday-signoff):not(.signature) { font-size: .7rem; line-height: 1.55; }
+    .birthday-signoff { margin: .65rem 0 .35rem; font-size: 1.45rem; }
+    .signature { font-size: .72rem; }
+    .music-player { padding: .8rem .7rem .7rem; }
+    .player-heading { min-height: 58px; gap: .45rem; }
+    .album-art { width: 48px; height: 48px; flex-basis: 48px; border-radius: 10px; }
+    .playlist-title { font-size: 1rem; white-space: normal; }
+    .playlist-subtitle { font-size: .58rem; }
+    .track-name { font-size: .56rem; }
+    .player-progress { margin: .6rem 0 .45rem; }
+    .time-row { font-size: .64rem; }
+    .player-controls { gap: .1rem; margin-bottom: .45rem; }
+    .control-button { width: 25px; height: 32px; }
+    .control-button svg { width: 17px; height: 17px; }
+    .play-button { width: 42px; height: 42px; flex-basis: 42px; }
+    .play-button svg { width: 22px; height: 22px; }
+    .player-footer { font-size: .78rem; }
 }
 
 @media (max-width: 370px) {
@@ -378,13 +439,24 @@ button { font: inherit; }
     .hero { padding-inline: .85rem; }
     .eyebrow { font-size: .73rem; }
     .hero-copy { font-size: .9rem; }
-    .feature-card { min-height: 175px; }
-    .feature-copy { font-size: .78rem; }
-    .heartfelt-row { padding-inline: 1rem; }
+    .feature-card { min-height: 150px; }
+    .feature-icon { width: 27px; height: 27px; }
+    .feature-title { font-size: 1.05rem; }
+    .feature-copy { min-height: 38px; font-size: .72rem; }
+    .feature-arrow { font-size: 1.15rem; }
+    .heartfelt-row { padding-inline: .85rem; }
+    .heartfelt-note h2 { font-size: 1.9rem; }
+    .heartfelt-note > p:not(.birthday-signoff):not(.signature) { font-size: .62rem; }
+    .birthday-signoff { font-size: 1.2rem; }
     .music-player { padding-inline: .9rem; }
     .player-heading { gap: .6rem; }
-    .album-art { width: 70px; height: 70px; flex-basis: 70px; }
-    .playlist-title { font-size: 1.27rem; }
+    .album-art { width: 42px; height: 42px; flex-basis: 42px; }
+    .playlist-title { font-size: .88rem; }
+    .playlist-subtitle { font-size: .52rem; }
+    .control-button { width: 22px; }
+    .control-button svg { width: 15px; height: 15px; }
+    .play-button { width: 37px; height: 37px; flex-basis: 37px; }
+    .play-button svg { width: 19px; height: 19px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
