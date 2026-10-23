@@ -1,14 +1,14 @@
 .timeline {
-    max-width: 800px;
-    margin: 2rem auto;
+    max-width: 100%;
+    margin: 1.5rem auto;
     position: relative;
+    padding-left: 2rem;
 }
 
 .timeline::before {
     content: '';
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 10px;
     width: 2px;
     height: 100%;
     background: rgba(255, 255, 255, 0.3);
@@ -16,42 +16,91 @@
 
 .timeline-item {
     display: flex;
-    justify-content: flex-end;
-    padding-right: 50%;
-    margin-bottom: 2rem;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
     position: relative;
 }
 
 .timeline-item:nth-child(even) {
-    justify-content: flex-start;
-    padding-right: 0;
-    padding-left: 50%;
+    flex-direction: column;
 }
 
 .timeline-date {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     padding: 0.5rem 1rem;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    font-size: 0.9rem;
+    align-self: flex-start;
 }
 
 .timeline-content {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 10px;
-    max-width: 350px;
+    max-width: 100%;
+}
+
+.timeline-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 15px;
-    height: 15px;
+    left: 2px;
+    width: 18px;
+    height: 18px;
     background: #fff;
     border-radius: 50%;
-    top: 20px;
+    top: 5px;
+}
+
+@media (min-width: 768px) {
+    .timeline {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding-left: 0;
+    }
+
+    .timeline::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 50%;
+        margin-bottom: 2rem;
+    }
+
+    .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-right: 0;
+        padding-left: 50%;
+    }
+
+    .timeline-date {
+        font-size: 1rem;
+        border-radius: 25px;
+    }
+
+    .timeline-content {
+        padding: 1.5rem;
+        max-width: 350px;
+    }
+
+    .timeline-content p {
+        font-size: 1rem;
+    }
+
+    .timeline-item::before {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 20px;
+    }
 }

@@ -1,12 +1,12 @@
 .memory-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .memory-item {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     padding: 1rem;
     border-radius: 15px;
@@ -14,19 +14,35 @@
     transition: transform 0.3s ease;
 }
 
-.memory-item:hover {
-    transform: scale(1.05);
+.memory-item:hover, .memory-item:active {
+    transform: scale(1.02);
 }
 
 .memory-item img {
     width: 100%;
-    height: 250px;
+    height: 200px;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 1rem;
 }
 
 .memory-item p {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-style: italic;
+}
+
+@media (min-width: 768px) {
+    .memory-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .memory-item img {
+        height: 250px;
+    }
+
+    .memory-item p {
+        font-size: 1.1rem;
+    }
 }
