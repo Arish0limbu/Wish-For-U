@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 50%, #ffd1dc 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.lock-screen {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.heart-lock-icon {
+    margin-bottom: 1.5rem;
+}
+
+.heart-lock-icon img {
+    width: 80px;
+    height: auto;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #d81b60;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.underline {
+    width: 150px;
+    height: 3px;
+    background: linear-gradient(90deg, #d81b60, #f48fb1);
+    margin: 0 auto 1.5rem;
+    border-radius: 2px;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: #880e4f;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+.pin-display {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.pin-dot {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #d81b60;
+    border-radius: 50%;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.pin-dot.filled {
+    background: #d81b60;
+    transform: scale(1.2);
+}
+
+.pin-dot.error {
+    border-color: #ff0000;
+    background: #ff0000;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.instruction {
+    font-size: 0.85rem;
+    color: #880e4f;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+    max-width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.key {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 2px solid #d81b60;
+    background: rgba(255, 255, 255, 0.8);
+    color: #d81b60;
+    font-size: 1.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
+}
+
+.key:hover {
+    background: #d81b60;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.3);
+}
+
+.key:active {
+    transform: translateY(0);
+}
+
+.clear-btn, .backspace-btn {
+    font-size: 1.2rem;
+    background: rgba(255, 182, 193, 0.8);
+}
+
+.clear-btn:hover, .backspace-btn:hover {
+    background: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    color: #880e4f;
+    font-style: italic;
+    font-weight: 300;
+    margin-top: 1rem;
+}
+
+/* Decorative elements */
+.lock-screen::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: url('../images/hearts/small-heart.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.6;
+}
+
+.lock-screen::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: url('../images/hearts/smaller-heart.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.6;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .lock-screen {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .heart-lock-icon img {
+        width: 70px;
+    }
+
+    .key {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+    }
+
+    .keypad {
+        gap: 0.75rem;
+        max-width: 240px;
+    }
+}
+
+@media (min-width: 768px) {
+    .lock-screen {
+        max-width: 450px;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .heart-lock-icon img {
+        width: 90px;
+    }
+
+    .key {
+        width: 75px;
+        height: 75px;
+    }
+}
