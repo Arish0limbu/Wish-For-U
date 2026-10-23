@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', function () {
     player.innerHTML = '<div class="floating-music-heading"><span class="floating-music-note" aria-hidden="true">♫</span><div class="floating-music-track"><span class="floating-music-label">Now playing</span><strong id="floating-track-title"></strong></div></div>' +
         '<input class="floating-music-seek" id="floating-seek" type="range" min="0" max="100" value="0" aria-label="Song progress">' +
         '<div class="floating-music-bottom"><div class="floating-music-controls"><button type="button" id="floating-previous" aria-label="Previous song">|‹</button><button class="floating-music-play" type="button" id="floating-play" aria-label="Play"><span aria-hidden="true">▶</span></button><button type="button" id="floating-next" aria-label="Next song">›|</button></div><span class="floating-music-time" id="floating-time">0:00</span></div>';
-    const audio = document.createElement('audio');
+    const audio = document.getElementById('birthday-audio') || document.createElement('audio');
     audio.id = 'birthday-audio';
     audio.preload = 'metadata';
-    player.append(audio);
+    if (!audio.isConnected) player.append(audio);
     document.body.append(player);
     document.body.classList.add('has-floating-music');
 
@@ -158,11 +158,18 @@ document.addEventListener('DOMContentLoaded', function () {
         } catch (error) { /* Ignore malformed saved state. */ }
     });
 
-    setTrack(currentTrack, startFromUnlock || Boolean(savedState && savedState.playing), pendingTime);
+    const currentTrackPath = encodeURIComponent(tracks[currentTrack].file);
+    if (audio.src && audio.src.endsWith(currentTrackPath)) {
+        title.textContent = tracks[currentTrack].title;
+        audio.loop = isRepeating;
+        updatePlayButton(!audio.paused);
+        timeLabel.textContent = formatTime(audio.currentTime);
+    } else {
+        setTrack(currentTrack, startFromUnlock || Boolean(savedState && savedState.playing), pendingTime);
+    }
 
     const siteFrame = document.getElementById('birthday-site-frame');
     if (siteFrame) {
-        const loadingScreen = document.getElementById('site-loading');
         function updateEmbeddedPage() {
             let frameWindow;
             let frameDocument;
@@ -177,9 +184,14 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.add('site-shell-ready');
             document.body.classList.toggle('has-floating-music', !isHome);
             if (frameDocument.title) document.title = frameDocument.title;
-            if (loadingScreen) loadingScreen.hidden = true;
         }
         siteFrame.addEventListener('load', updateEmbeddedPage);
-        siteFrame.src = siteFrame.dataset.startPage || 'home.html';
+        try {
+            if (siteFrame.contentDocument && siteFrame.contentDocument.readyState === 'complete' &&
+                siteFrame.contentWindow.location.pathname.toLowerCase().endsWith('/home.html')) {
+                updateEmbeddedPage();
+            }
+        } catch (error) { /* The iframe may still be loading. */ }
+        if (!siteFrame.hasAttribute('src')) siteFrame.src = siteFrame.dataset.startPage || 'home.html';
     }
 });

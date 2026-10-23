@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let isRepeating = Boolean(savedState && savedState.repeat);
     let pendingRestoreTime = savedState && Number.isFinite(savedState.currentTime) ? Math.max(0, savedState.currentTime) : 0;
     let lastSavedAt = 0;
-    if (isSharedAudio) pendingRestoreTime = 0;
+    if (isSharedAudio && audio.src) pendingRestoreTime = 0;
 
     function formatTime(seconds) {
         if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
