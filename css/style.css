@@ -123,8 +123,13 @@ img { max-width: 100%; }
 .floating-music-controls .floating-music-play { width: 32px; height: 32px; color: #fff; background: linear-gradient(140deg, #cf6a80, #ad425c); box-shadow: 0 4px 12px rgba(159, 59, 81, .16); font-size: .78rem; }
 .floating-music-controls .floating-music-play:hover { background: #ad425c; }
 .floating-music-time { color: #8d5360; font-size: .62rem; font-variant-numeric: tabular-nums; }
-.site-shell-page { width: 100%; height: 100vh; height: 100dvh; min-height: 0; margin: 0; padding: 0; overflow: hidden; background: #fcebec; }
-.site-shell-page #birthday-site-frame { width: 100%; height: 100vh; height: 100dvh; display: block; border: 0; background: transparent; }
+.site-shell-page { position: relative; width: 100%; height: 100vh; height: 100dvh; min-height: 0; margin: 0; padding: 0; overflow: hidden; background: #fcebec; }
+.site-shell-page #birthday-site-frame { position: relative; z-index: 1; width: 100%; height: 100vh; height: 100dvh; display: block; border: 0; background: #fcebec; }
+.site-loading { position: fixed; z-index: 101; inset: 0; display: grid; place-items: center; padding: 1rem; color: #914357; background: radial-gradient(ellipse at 52% 42%, rgba(255,255,255,.92), rgba(255,237,240,.96) 58%, #f9dfe4 100%); text-align: center; }
+.site-loading[hidden] { display: none; }
+.site-loading-message p { margin: .75rem 0 0; font: 600 clamp(1.35rem, 5vw, 2rem)/1.25 'Dancing Script', cursive; }
+.site-loading-heart { display: inline-block; color: #c2536a; font-size: 2rem; animation: site-loading-pulse 1s ease-in-out infinite alternate; }
+@keyframes site-loading-pulse { to { transform: scale(1.25); opacity: .65; } }
 .site-shell-page:not(.site-shell-ready) .floating-music { visibility: hidden; }
 .site-shell-page.is-home-page { padding-bottom: 0; }
 .site-shell-page.is-home-page .floating-music { display: none; }

@@ -6,6 +6,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const reset = document.getElementById('reset-surprise');
     const video = document.getElementById('surprise-video-player');
     const videoUrl = 'https://www.youtube-nocookie.com/embed/jQMCRwKOgZM?autoplay=1&rel=0';
+    let backgroundAudio = document.getElementById('birthday-audio');
+    try {
+        backgroundAudio = window.parent.document.getElementById('birthday-audio') || backgroundAudio;
+    } catch (error) { /* The parent page may not be same-origin. */ }
+    let resumeMusicAfterSurprise = false;
+    let musicPositionBeforeSurprise = 0;
+
+    function pauseBackgroundMusic() {
+        if (!backgroundAudio) return;
+        resumeMusicAfterSurprise = !backgroundAudio.paused;
+        musicPositionBeforeSurprise = backgroundAudio.currentTime;
+        if (resumeMusicAfterSurprise) backgroundAudio.pause();
+    }
+
+    function resumeBackgroundMusic() {
+        if (!backgroundAudio || !resumeMusicAfterSurprise) return;
+        if (backgroundAudio.paused && Number.isFinite(musicPositionBeforeSurprise)) {
+            backgroundAudio.currentTime = musicPositionBeforeSurprise;
+        }
+        const playResult = backgroundAudio.play();
+        if (playResult && typeof playResult.catch === 'function') playResult.catch(function () {});
+        resumeMusicAfterSurprise = false;
+    }
 
     function makeHearts() {
         confetti.replaceChildren();
@@ -22,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     button.addEventListener('click', function () {
+        pauseBackgroundMusic();
         content.hidden = false;
         video.src = videoUrl;
         stage.classList.add('is-open');
@@ -34,9 +58,12 @@ document.addEventListener('DOMContentLoaded', function () {
     reset.addEventListener('click', function () {
         content.hidden = true;
         video.src = 'about:blank';
+        resumeBackgroundMusic();
         stage.classList.remove('is-open');
         button.hidden = false;
         button.setAttribute('aria-expanded', 'false');
         button.focus();
     });
+
+    window.addEventListener('pagehide', resumeBackgroundMusic);
 });

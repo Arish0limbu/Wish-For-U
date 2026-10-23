@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const siteFrame = document.getElementById('birthday-site-frame');
     if (siteFrame) {
+        const loadingScreen = document.getElementById('site-loading');
         function updateEmbeddedPage() {
             let frameWindow;
             let frameDocument;
@@ -176,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.classList.add('site-shell-ready');
             document.body.classList.toggle('has-floating-music', !isHome);
             if (frameDocument.title) document.title = frameDocument.title;
+            if (loadingScreen) loadingScreen.hidden = true;
         }
         siteFrame.addEventListener('load', updateEmbeddedPage);
         siteFrame.src = siteFrame.dataset.startPage || 'home.html';
