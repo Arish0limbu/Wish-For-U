@@ -7,6 +7,29 @@ document.addEventListener('DOMContentLoaded', function () {
         { title: 'Timro Pratiksa — Shallum Lama', file: 'Timro Pratiksa - Shallum Lama [To Mini][Official Video].mp3' },
         { title: 'Kasari — Yabesh Thapa', file: 'Yabesh Thapa - Kasari _ कसरी.mp3' }
     ];
+    const musicStateKey = 'wishForU.musicState';
+
+    function readMusicState() {
+        try { return JSON.parse(localStorage.getItem(musicStateKey) || 'null'); }
+        catch (error) { return null; }
+    }
+    function saveMusicState() {
+        try {
+            localStorage.setItem(musicStateKey, JSON.stringify({
+                trackIndex: currentTrack,
+                currentTime: Number.isFinite(audio.currentTime) ? audio.currentTime : 0,
+                playing: !audio.paused,
+                shuffle: isShuffling,
+                repeat: isRepeating
+            }));
+        } catch (error) { /* Storage may be disabled. */ }
+    }
+    const savedState = readMusicState();
+    let startFromUnlock = false;
+    try {
+        startFromUnlock = sessionStorage.getItem('wishForU.startMusicOnHome') === 'true';
+        sessionStorage.removeItem('wishForU.startMusicOnHome');
+    } catch (error) { /* Storage may be disabled. */ }
 
     const audio = document.getElementById('birthday-audio');
     const playButton = document.getElementById('play-button');
@@ -21,9 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuToggle = document.querySelector('.menu-toggle');
     const menu = document.getElementById('site-menu');
 
-    let currentTrack = 0;
-    let isShuffling = false;
-    let isRepeating = false;
+    let currentTrack = savedState && Number.isInteger(savedState.trackIndex) ? savedState.trackIndex % tracks.length : 0;
+    let isShuffling = Boolean(savedState && savedState.shuffle);
+    let isRepeating = Boolean(savedState && savedState.repeat);
+    let pendingRestoreTime = savedState && Number.isFinite(savedState.currentTime) ? Math.max(0, savedState.currentTime) : 0;
+    let lastSavedAt = 0;
 
     function formatTime(seconds) {
         if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -32,9 +57,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return minutes + ':' + remainingSeconds;
     }
 
-    function setTrack(index, shouldPlay) {
+    function setTrack(index, shouldPlay, startTime) {
         currentTrack = (index + tracks.length) % tracks.length;
         const track = tracks[currentTrack];
+        pendingRestoreTime = Number.isFinite(startTime) ? Math.max(0, startTime) : 0;
         audio.src = 'music/' + encodeURIComponent(track.file);
         audio.load();
         trackName.textContent = track.title;
@@ -55,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function playAudio() {
         const result = audio.play();
         if (result && typeof result.catch === 'function') {
-            result.catch(function () { setPlaying(false); });
+            result.catch(function () { setPlaying(false); saveMusicState(); });
         }
     }
 
@@ -90,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         isShuffling = !isShuffling;
         shuffleButton.setAttribute('aria-pressed', String(isShuffling));
         shuffleButton.setAttribute('aria-label', isShuffling ? 'Shuffle on' : 'Shuffle off');
+        saveMusicState();
     });
 
     repeatButton.addEventListener('click', function () {
@@ -97,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         audio.loop = isRepeating;
         repeatButton.setAttribute('aria-pressed', String(isRepeating));
         repeatButton.setAttribute('aria-label', isRepeating ? 'Repeat song on' : 'Repeat off');
+        saveMusicState();
     });
 
     seekBar.addEventListener('input', function () {
@@ -106,10 +134,14 @@ document.addEventListener('DOMContentLoaded', function () {
         seekBar.style.setProperty('--progress', seekBar.value + '%');
     });
 
-    audio.addEventListener('play', function () { setPlaying(true); });
-    audio.addEventListener('pause', function () { setPlaying(false); });
+    audio.addEventListener('play', function () { setPlaying(true); saveMusicState(); });
+    audio.addEventListener('pause', function () { setPlaying(false); saveMusicState(); });
     audio.addEventListener('loadedmetadata', function () {
         duration.textContent = formatTime(audio.duration);
+        if (pendingRestoreTime > 0 && pendingRestoreTime < audio.duration) {
+            audio.currentTime = pendingRestoreTime;
+            pendingRestoreTime = 0;
+        }
     });
     audio.addEventListener('timeupdate', function () {
         currentTime.textContent = formatTime(audio.currentTime);
@@ -117,6 +149,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const progress = (audio.currentTime / audio.duration) * 100;
             seekBar.value = String(progress);
             seekBar.style.setProperty('--progress', progress + '%');
+        }
+        if (Date.now() - lastSavedAt > 4000) {
+            lastSavedAt = Date.now();
+            saveMusicState();
         }
     });
     audio.addEventListener('ended', function () { moveToNextTrack(true); });
@@ -144,5 +180,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    setTrack(0, false);
+    const initialTrack = currentTrack;
+    const initialPosition = pendingRestoreTime;
+    setTrack(initialTrack, false, initialPosition);
+    audio.loop = isRepeating;
+    shuffleButton.setAttribute('aria-pressed', String(isShuffling));
+    repeatButton.setAttribute('aria-pressed', String(isRepeating));
+    if (startFromUnlock || !savedState || savedState.playing) playAudio();
+    window.addEventListener('pagehide', saveMusicState);
 });

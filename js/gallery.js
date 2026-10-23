@@ -22,8 +22,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const dialog = document.getElementById('photo-lightbox');
     const lightboxImage = document.getElementById('lightbox-image');
     const lightboxCaption = document.getElementById('lightbox-caption');
+    const slideCount = document.getElementById('slide-count');
+    const slideshowToggle = document.getElementById('slideshow-toggle');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let visiblePhotos = photos.slice();
     let activeIndex = 0;
+    let slideIndex = 0;
+    let isAutoplaying = !prefersReducedMotion;
+
+    function updateSlideshow(animate) {
+        grid.style.transition = animate && !prefersReducedMotion ? 'transform .72s cubic-bezier(.22,.72,.2,1)' : 'none';
+        grid.style.transform = 'translate3d(-' + (slideIndex * 100) + '%, 0, 0)';
+        Array.from(grid.children).forEach(function (slide, index) {
+            slide.setAttribute('aria-label', 'Photo ' + (index + 1) + ' of ' + visiblePhotos.length + ': ' + visiblePhotos[index].caption);
+            slide.setAttribute('aria-current', String(index === slideIndex));
+        });
+        slideCount.textContent = String(slideIndex + 1).padStart(2, '0') + ' / ' + String(visiblePhotos.length).padStart(2, '0');
+        const upcoming = grid.children[(slideIndex + 1) % visiblePhotos.length];
+        const upcomingImage = upcoming && upcoming.querySelector('img');
+        if (upcomingImage) upcomingImage.loading = 'eager';
+    }
+
+    function moveSlide(step) {
+        if (visiblePhotos.length < 2) return;
+        slideIndex = (slideIndex + step + visiblePhotos.length) % visiblePhotos.length;
+        updateSlideshow(true);
+    }
+
+    function setAutoplay(playing) {
+        isAutoplaying = playing;
+        slideshowToggle.setAttribute('aria-pressed', String(playing));
+        slideshowToggle.setAttribute('aria-label', playing ? 'Pause slideshow' : 'Play slideshow');
+        slideshowToggle.querySelector('span').textContent = playing ? 'Ⅱ' : '▶';
+    }
 
     function renderGrid(filter) {
         visiblePhotos = filter === 'all' ? photos.slice() : photos.filter(function (photo) { return photo.group === filter; });
@@ -32,11 +63,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'memory-card';
+            button.setAttribute('aria-roledescription', 'slide');
             button.setAttribute('aria-label', 'Open photo ' + (index + 1) + ': ' + photo.caption);
             const image = document.createElement('img');
             image.src = photo.src;
             image.alt = photo.alt;
-            image.loading = 'lazy';
+            image.loading = index < 2 ? 'eager' : 'lazy';
             image.decoding = 'async';
             const caption = document.createElement('div');
             caption.className = 'memory-caption';
@@ -50,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
             grid.append(button);
         });
         count.textContent = visiblePhotos.length + (visiblePhotos.length === 1 ? ' photo' : ' photos');
+        slideIndex = 0;
+        updateSlideshow(false);
     }
 
     function showCurrentPhoto() {
@@ -59,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function () {
         lightboxImage.alt = photo.alt;
         lightboxCaption.textContent = photo.caption + (photo.group === 'her' ? ' · just you' : ' · together');
     }
-    function openPhoto(index) { activeIndex = index; showCurrentPhoto(); if (!dialog.open) dialog.showModal(); }
-    function movePhoto(step) { activeIndex = (activeIndex + step + visiblePhotos.length) % visiblePhotos.length; showCurrentPhoto(); }
+    function openPhoto(index) { activeIndex = index; slideIndex = index; updateSlideshow(false); showCurrentPhoto(); if (!dialog.open) dialog.showModal(); }
+    function movePhoto(step) { activeIndex = (activeIndex + step + visiblePhotos.length) % visiblePhotos.length; slideIndex = activeIndex; updateSlideshow(true); showCurrentPhoto(); }
 
     filterButtons.forEach(function (button) {
         button.addEventListener('click', function () {
@@ -73,7 +107,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('lightbox-close').addEventListener('click', function () { dialog.close(); });
     document.getElementById('lightbox-prev').addEventListener('click', function () { movePhoto(-1); });
     document.getElementById('lightbox-next').addEventListener('click', function () { movePhoto(1); });
+    document.getElementById('gallery-previous').addEventListener('click', function () { moveSlide(-1); });
+    document.getElementById('gallery-next').addEventListener('click', function () { moveSlide(1); });
+    slideshowToggle.addEventListener('click', function () { setAutoplay(!isAutoplaying); });
     dialog.addEventListener('click', function (event) { if (event.target === dialog) dialog.close(); });
     document.addEventListener('keydown', function (event) { if (!dialog.open) return; if (event.key === 'ArrowLeft') movePhoto(-1); if (event.key === 'ArrowRight') movePhoto(1); });
     renderGrid('all');
+    setAutoplay(!prefersReducedMotion);
+    window.setInterval(function () {
+        if (isAutoplaying && !document.hidden && !dialog.open) moveSlide(1);
+    }, 3000);
 });

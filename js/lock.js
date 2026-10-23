@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showSuccessAnimation() {
+        try { sessionStorage.setItem('wishForU.startMusicOnHome', 'true'); } catch (error) { /* Storage may be disabled. */ }
         // Hide everything and show "CORRECT" message
         const keypad = document.querySelector('.keypad');
         const instruction = document.querySelector('.instruction');

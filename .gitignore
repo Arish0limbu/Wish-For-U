@@ -3,10 +3,6 @@
 # images/*.png
 # images/*.jpeg
 
-# Music
-music/*.mp3
-music/*.wav
-
 # Assets
 assets/icons/*
 assets/fonts/*

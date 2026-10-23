@@ -22,9 +22,9 @@
     <main class="page-shell gallery-shell">
         <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
         <header class="page-heading">
-            <p class="page-kicker">Every photo in one place</p>
+            <p class="page-kicker">A new photo every three seconds</p>
             <h1 class="page-title">The Gallery</h1>
-            <p class="page-intro">Browse all your favorite photos, or open one to see it up close.</p>
+            <p class="page-intro">Photos glide from right to left. Pause the slideshow or browse at your own pace.</p>
             <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
         </header>
         <div class="gallery-toolbar">
@@ -35,7 +35,19 @@
             </div>
             <p id="gallery-count" aria-live="polite"></p>
         </div>
-        <section class="memory-grid" id="memory-grid" aria-label="Photo gallery"></section>
+        <section class="gallery-slideshow" aria-label="Photo slideshow" role="region" aria-roledescription="carousel">
+            <div class="slideshow-row">
+                <button class="slideshow-arrow" id="gallery-previous" type="button" aria-label="Previous photo">‹</button>
+                <div class="slideshow-window">
+                    <div class="memory-grid" id="memory-grid" role="group" aria-label="Photo slides"></div>
+                </div>
+                <button class="slideshow-arrow" id="gallery-next" type="button" aria-label="Next photo">›</button>
+            </div>
+            <div class="slideshow-footer">
+                <span id="slide-count" aria-live="off">01 / 25</span>
+                <button class="slideshow-toggle" id="slideshow-toggle" type="button" aria-label="Pause slideshow" aria-pressed="true"><span aria-hidden="true">Ⅱ</span></button>
+            </div>
+        </section>
         <dialog class="photo-lightbox" id="photo-lightbox" aria-label="Photo viewer">
             <div class="lightbox-frame">
                 <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close photo">×</button>

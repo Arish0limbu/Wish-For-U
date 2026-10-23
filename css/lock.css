@@ -209,7 +209,7 @@ body::before {
     border: 2px solid #d81b60;
     animation: hintBounce 0.5s ease;
     box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
-    max-width: 400px;
+    max-width: 450px;
     text-align: center;
 }
 
