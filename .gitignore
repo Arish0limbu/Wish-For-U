@@ -1,7 +1,7 @@
-# Images
-images/*.jpg
-images/*.png
-images/*.jpeg
+# Images (commented out to allow background.jpg)
+# images/*.jpg
+# images/*.png
+# images/*.jpeg
 
 # Music
 music/*.mp3
