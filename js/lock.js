@@ -70,33 +70,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showSuccessAnimation() {
-        // Show success state on PIN dots
-        pinDots.forEach(dot => {
-            dot.classList.add('success');
-        });
-
-        // Hide keypad and show success message
+        // Hide everything and show "CORRECT" message
         const keypad = document.querySelector('.keypad');
         const instruction = document.querySelector('.instruction');
         const subtitle = document.querySelector('.subtitle');
         const footerText = document.querySelector('.footer-text');
+        const hintMessage = document.querySelector('.hint-message');
+        const pinDisplay = document.querySelector('.pin-display');
         const successMessage = document.querySelector('.success-message');
         const heartLockIcon = document.querySelector('.heart-lock-icon');
         const lockScreen = document.querySelector('.lock-screen');
 
+        // Hide all elements
         keypad.style.opacity = '0';
-        keypad.style.transition = 'opacity 0.5s ease';
+        keypad.style.transition = 'opacity 0.2s ease';
         instruction.style.opacity = '0';
-        instruction.style.transition = 'opacity 0.5s ease';
+        instruction.style.transition = 'opacity 0.2s ease';
         subtitle.style.opacity = '0';
-        subtitle.style.transition = 'opacity 0.5s ease';
+        subtitle.style.transition = 'opacity 0.2s ease';
         footerText.style.opacity = '0';
-        footerText.style.transition = 'opacity 0.5s ease';
+        footerText.style.transition = 'opacity 0.2s ease';
+        hintMessage.style.opacity = '0';
+        hintMessage.style.transition = 'opacity 0.2s ease';
+        pinDisplay.style.opacity = '0';
+        pinDisplay.style.transition = 'opacity 0.2s ease';
 
+        // Show "CORRECT" message immediately
         setTimeout(() => {
             successMessage.classList.add('show');
-            heartLockIcon.classList.add('unlocked');
-        }, 300);
+        }, 100);
 
         // Create floating hearts
         createFloatingHearts();
@@ -104,11 +106,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fade out screen and redirect
         setTimeout(() => {
             lockScreen.classList.add('unlocking');
-        }, 800);
+        }, 400);
 
         setTimeout(() => {
             window.location.href = 'home.html';
-        }, 1800);
+        }, 800);
     }
 
     function createFloatingHearts() {
@@ -144,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             removeErrorState();
             hintMessage.classList.remove('show');
-        }, 2500);
+        }, 5000);
     }
 
     function removeErrorState() {
