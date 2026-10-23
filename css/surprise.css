@@ -1,93 +1,29 @@
-.surprise-box {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    padding: 1.5rem;
-    border-radius: 15px;
-    max-width: 100%;
-    margin: 1rem auto;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.surprise-box p {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-#surprise-btn {
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    background: #ff6b6b;
-    color: #fff;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 300px;
-}
-
-#surprise-btn:hover, #surprise-btn:active {
-    background: #ff5252;
-    transform: scale(1.02);
-}
-
-.hidden {
-    display: none;
-}
-
-#surprise-content {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    animation: fadeIn 0.5s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-#surprise-content p {
-    font-size: 1.2rem;
-    font-weight: bold;
-    line-height: 1.5;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@media (min-width: 768px) {
-    .surprise-box {
-        padding: 2.5rem;
-        max-width: 600px;
-        margin: 2rem auto;
-    }
-
-    .surprise-box p {
-        font-size: 1.3rem;
-        margin-bottom: 2rem;
-    }
-
-    #surprise-btn {
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
-        width: auto;
-    }
-
-    #surprise-content {
-        margin-top: 2rem;
-        padding: 2rem;
-    }
-
-    #surprise-content p {
-        font-size: 1.5rem;
-    }
-}
+.surprise-shell { max-width: 860px; }
+.surprise-stage { max-width: 660px; min-height: 420px; margin: .5rem auto 0; padding: 2.1rem 1.5rem 2.3rem; position: relative; overflow: hidden; text-align: center; }
+.gift-wrap { width: 150px; height: 145px; margin: 0 auto .7rem; position: relative; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+.gift-box { width: 120px; height: 82px; position: absolute; z-index: 2; left: 15px; bottom: 0; border: 1px solid rgba(161, 65, 89, .2); border-radius: 6px 6px 13px 13px; background: linear-gradient(135deg, #d77a8d, #bd4d68); box-shadow: 0 11px 18px rgba(139, 47, 67, .18); }
+.gift-box::before { content: ''; position: absolute; top: 0; bottom: 0; left: 46px; width: 25px; background: #f8dfe1; }
+.gift-box i { width: 120px; height: 20px; position: absolute; top: 30px; left: 0; background: rgba(255,255,255,.18); }
+.gift-lid { width: 140px; height: 27px; position: absolute; z-index: 3; left: 5px; bottom: 76px; border: 1px solid rgba(161, 65, 89, .2); border-radius: 7px; background: linear-gradient(140deg, #e29aa7, #c55d74); box-shadow: 0 5px 9px rgba(139, 47, 67, .13); transform-origin: 14% 100%; transition: transform .5s ease; }
+.gift-lid::before { content: ''; position: absolute; top: 0; bottom: 0; left: 55px; width: 26px; background: #f9e4e6; }
+.gift-bow { position: absolute; z-index: 4; left: 50%; top: 1px; transform: translateX(-50%); color: #a83d56; font: 4.2rem/.8 'Dancing Script', cursive; }
+.gift-prompt { margin: .7rem 0 .8rem; color: #895760; font: 600 1.45rem 'Dancing Script', cursive; }
+.surprise-button { min-width: 215px; }
+.surprise-stage.is-open .gift-wrap { transform: translateY(-12px) scale(.82); }
+.surprise-stage.is-open .gift-lid { transform: translate(-40px,-80px) rotate(-28deg); }
+.surprise-content { max-width: 520px; margin: .5rem auto 0; animation: reveal-surprise .55s cubic-bezier(.2,.8,.2,1) both; }
+.surprise-content[hidden] { display: none; }
+.surprise-eyebrow { margin: .35rem 0 .1rem; color: #b85b70; font-size: .72rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.surprise-content h2 { margin: 0 0 .55rem; color: #9e435a; font: 700 clamp(2rem, 5vw, 2.8rem)/1.15 'Dancing Script', cursive; }
+.surprise-message { max-width: 470px; margin: 0 auto 1rem; color: #80565c; font-size: .88rem; line-height: 1.8; }
+.surprise-photo { margin: 0 auto; padding: .5rem .5rem .8rem; width: min(100%, 340px); border: 1px solid rgba(177, 76, 99, .12); border-radius: 5px 5px 17px 5px; background: rgba(255,255,255,.78); box-shadow: 0 7px 20px rgba(124, 58, 73, .12); transform: rotate(-1deg); }
+.surprise-photo img { width: 100%; max-height: 250px; display: block; object-fit: cover; border-radius: 3px; }
+.surprise-photo figcaption { padding: .55rem .2rem 0; color: #8f5962; font: 600 1.05rem 'Dancing Script', cursive; }
+.surprise-photo figcaption span { color: #c2536a; }
+.surprise-reset { margin: .9rem auto 0; padding: .45rem .75rem; border: 0; color: #a35e6b; background: transparent; font-size: .75rem; cursor: pointer; }
+.surprise-reset:hover { color: #773546; }
+.surprise-confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.confetti-heart { position: absolute; top: 65%; color: #c25970; font-size: 1rem; animation: heart-pop 1.5s ease-out forwards; }
+@keyframes heart-pop { 0% { opacity: 0; transform: translateY(0) scale(.4) rotate(0); } 15% { opacity: 1; } 100% { opacity: 0; transform: translateY(-220px) scale(1.15) rotate(30deg); } }
+@keyframes reveal-surprise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 520px) { .surprise-stage { min-height: 390px; padding: 1.45rem .9rem 1.7rem; } .gift-wrap { transform: scale(.9); margin-bottom: .15rem; } .surprise-stage.is-open .gift-wrap { transform: translateY(-8px) scale(.72); } .surprise-message { font-size: .82rem; } }

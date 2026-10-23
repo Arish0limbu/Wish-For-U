@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise - Wish For U</title>
+    <meta name="theme-color" content="#fcebec">
+    <title>A Birthday Surprise for You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/surprise.css">
 </head>
-<body>
-    <div class="container">
-        <h1>A Special Surprise</h1>
-        <div class="surprise-box">
-            <p>✨ Click to reveal your surprise ✨</p>
-            <button id="surprise-btn">Open Surprise</button>
-            <div id="surprise-content" class="hidden">
-                <p>Surprise! You are amazing and I love you! 💕</p>
-            </div>
-        </div>
-        <nav class="back-nav">
-            <a href="home.html">Back Home</a>
+<body class="surprise-page">
+    <header class="site-header">
+        <a class="brand" href="home.html"><span class="brand-heart" aria-hidden="true">♥</span><span>Happy Birthday</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+        <nav class="menu-panel" id="site-menu" aria-label="Main navigation" hidden>
+            <a href="home.html">Home</a><a href="wish.html">Birthday wishes</a><a href="memory.html">Memories</a><a href="home.html#music">Playlist</a><a href="our-story.html">Our story</a><a href="love-letter.html">Love letter</a><a href="surprise.html" aria-current="page">Surprise</a>
         </nav>
-    </div>
+    </header>
+    <main class="page-shell surprise-shell">
+        <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
+        <header class="page-heading">
+            <p class="page-kicker">One last little thing</p>
+            <h1 class="page-title">A Birthday Surprise</h1>
+            <p class="page-intro">There is something special tucked inside this little gift.</p>
+            <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
+        </header>
+        <section class="surprise-stage glass-panel" aria-label="Birthday gift">
+            <div class="gift-wrap" aria-hidden="true"><span class="gift-bow">♡</span><span class="gift-lid"></span><span class="gift-box"><i></i></span></div>
+            <p class="gift-prompt">A gift for the birthday girl</p>
+            <button class="action-button surprise-button" id="surprise-btn" type="button" aria-expanded="false" aria-controls="surprise-content">Open your surprise <span aria-hidden="true">→</span></button>
+            <div class="surprise-content" id="surprise-content" hidden aria-live="polite">
+                <p class="surprise-eyebrow">Surprise, Budi!</p>
+                <h2>You make life more beautiful.</h2>
+                <p class="surprise-message">I hope your birthday feels as warm and wonderful as the happiness you bring into my life. Here is to your smile, your dreams, and all the lovely days still ahead.</p>
+                <figure class="surprise-photo"><img src="images/ourpic/IMG-20251023-WA0011.jpg" alt="A favorite photo of the two of you together"><figcaption>One of my favorite people, on her favorite day <span aria-hidden="true">♡</span></figcaption></figure>
+                <button class="surprise-reset" id="reset-surprise" type="button">Wrap it up again <span aria-hidden="true">↻</span></button>
+            </div>
+            <div class="surprise-confetti" id="surprise-confetti" aria-hidden="true"></div>
+        </section>
+    </main>
+    <footer class="site-footer"><p>Happy birthday, Budi <span aria-hidden="true">♥</span></p></footer>
     <script src="js/main.js"></script>
     <script src="js/surprise.js"></script>
 </body>

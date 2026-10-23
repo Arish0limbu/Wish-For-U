@@ -3,28 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishes - Wish For U</title>
+    <meta name="theme-color" content="#fcebec">
+    <title>Birthday Wishes for You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/wish.css">
 </head>
-<body>
-    <div class="container">
-        <h1>My Wishes For You</h1>
-        <div class="wishes-grid">
-            <div class="wish-card">
-                <p>May all your dreams come true</p>
-            </div>
-            <div class="wish-card">
-                <p>May you always be happy and healthy</p>
-            </div>
-            <div class="wish-card">
-                <p>May you find love and peace</p>
-            </div>
-        </div>
-        <nav class="back-nav">
-            <a href="home.html">Back Home</a>
+<body class="wish-page">
+    <header class="site-header">
+        <a class="brand" href="home.html"><span class="brand-heart" aria-hidden="true">♥</span><span>Happy Birthday</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+        <nav class="menu-panel" id="site-menu" aria-label="Main navigation" hidden>
+            <a href="home.html">Home</a><a href="wish.html" aria-current="page">Birthday wishes</a><a href="memory.html">Memories</a><a href="home.html#music">Playlist</a><a href="our-story.html">Our story</a><a href="love-letter.html">Love letter</a><a href="surprise.html">Surprise</a>
         </nav>
-    </div>
+    </header>
+    <main class="page-shell">
+        <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
+        <header class="page-heading">
+            <p class="page-kicker">A little collection, just for you</p>
+            <h1 class="page-title">Birthday Wishes</h1>
+            <p class="page-intro">For the year ahead, and for all the lovely things you deserve.</p>
+            <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
+        </header>
+        <section class="wish-note glass-panel">
+            <span class="wish-note-mark" aria-hidden="true">“</span>
+            <p>Today is a celebration of you: your kind heart, your bright smile, and all the joy you bring along with you.</p>
+            <span class="wish-note-signature">With all my love, Arish <span aria-hidden="true">♡</span></span>
+        </section>
+        <div class="wish-toolbar"><p>Keep the wishes that make you smile.</p><span id="saved-wishes" aria-live="polite">0 saved</span></div>
+        <section class="wishes-grid" aria-label="Birthday wishes">
+            <article class="wish-card wish-card-one"><span class="wish-number">01</span><button class="wish-save" type="button" aria-label="Save wish 1" aria-pressed="false">♡</button><p>I hope the days ahead bring you gentle mornings, big laughs, and all the little things that make you feel loved.</p><span class="wish-card-footer">A wish for your everyday</span></article>
+            <article class="wish-card wish-card-two"><span class="wish-number">02</span><button class="wish-save" type="button" aria-label="Save wish 2" aria-pressed="false">♡</button><p>May you keep finding new things to dream about, and the courage to go after every one.</p><span class="wish-card-footer">A wish for your dreams</span></article>
+            <article class="wish-card wish-card-three"><span class="wish-number">03</span><button class="wish-save" type="button" aria-label="Save wish 3" aria-pressed="false">♡</button><p>May every kindness you give find its way back to you twice over.</p><span class="wish-card-footer">A wish for your kind heart</span></article>
+            <article class="wish-card wish-card-four"><span class="wish-number">04</span><button class="wish-save" type="button" aria-label="Save wish 4" aria-pressed="false">♡</button><p>I hope this next year makes room for new places, favorite songs, good food, and people who feel like home.</p><span class="wish-card-footer">A wish for new memories</span></article>
+            <article class="wish-card wish-card-five"><span class="wish-number">05</span><button class="wish-save" type="button" aria-label="Save wish 5" aria-pressed="false">♡</button><p>On hard days, remember how much light you bring to the people around you.</p><span class="wish-card-footer">A wish for your bright days</span></article>
+            <article class="wish-card wish-card-six"><span class="wish-number">06</span><button class="wish-save" type="button" aria-label="Save wish 6" aria-pressed="false">♡</button><p>May we keep making ordinary days into favorite memories, one little moment at a time.</p><span class="wish-card-footer">A wish for us</span></article>
+        </section>
+        <p class="wish-bottom-note">Save a few for the days you need a reminder <span aria-hidden="true">♥</span></p>
+    </main>
+    <footer class="site-footer"><p>Another year, more dreams, more happiness <span aria-hidden="true">♥</span></p></footer>
     <script src="js/main.js"></script>
     <script src="js/wish.js"></script>
 </body>

@@ -3,31 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memories - Wish For U</title>
+    <meta name="theme-color" content="#fcebec">
+    <title>Our Memories</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/memory.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Our Memories</h1>
-        <div class="memory-gallery">
-            <div class="memory-item">
-                <img src="images/couple1.jpg" alt="Memory 1">
-                <p>A beautiful moment</p>
-            </div>
-            <div class="memory-item">
-                <img src="images/couple2.jpg" alt="Memory 2">
-                <p>Another special time</p>
-            </div>
-            <div class="memory-item">
-                <img src="images/couple3.jpg" alt="Memory 3">
-                <p>Unforgettable days</p>
-            </div>
-        </div>
-        <nav class="back-nav">
-            <a href="home.html">Back Home</a>
+<body class="memory-page">
+    <header class="site-header">
+        <a class="brand" href="home.html"><span class="brand-heart" aria-hidden="true">♥</span><span>Happy Birthday</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+        <nav class="menu-panel" id="site-menu" aria-label="Main navigation" hidden>
+            <a href="home.html">Home</a><a href="wish.html">Birthday wishes</a><a href="memory.html" aria-current="page">Memories</a><a href="home.html#music">Playlist</a><a href="our-story.html">Our story</a><a href="love-letter.html">Love letter</a><a href="surprise.html">Surprise</a>
         </nav>
-    </div>
+    </header>
+    <main class="page-shell memory-shell">
+        <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
+        <header class="page-heading">
+            <p class="page-kicker">Little moments, kept close</p>
+            <h1 class="page-title">Our Memories</h1>
+            <p class="page-intro">A scrapbook of your favorite photos and the moments we share.</p>
+            <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
+        </header>
+        <div class="gallery-toolbar">
+            <div class="gallery-filters" role="group" aria-label="Filter the photo scrapbook">
+                <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All moments</button>
+                <button class="filter-chip" type="button" data-filter="her" aria-pressed="false">Just you</button>
+                <button class="filter-chip" type="button" data-filter="us" aria-pressed="false">Us together</button>
+            </div>
+            <p id="gallery-count" aria-live="polite"></p>
+        </div>
+        <section class="memory-grid" id="memory-grid" aria-label="Photo scrapbook"></section>
+        <dialog class="photo-lightbox" id="photo-lightbox" aria-label="Photo viewer">
+            <div class="lightbox-frame">
+                <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Close photo">×</button>
+                <button class="lightbox-arrow lightbox-prev" id="lightbox-prev" type="button" aria-label="Previous photo">‹</button>
+                <figure><img id="lightbox-image" src="" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
+                <button class="lightbox-arrow lightbox-next" id="lightbox-next" type="button" aria-label="Next photo">›</button>
+            </div>
+        </dialog>
+    </main>
+    <footer class="site-footer"><p>Some moments deserve their own little place <span aria-hidden="true">♥</span></p></footer>
     <script src="js/main.js"></script>
     <script src="js/memory.js"></script>
 </body>

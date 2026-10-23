@@ -3,37 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Story - Wish For U</title>
+    <meta name="theme-color" content="#fcebec">
+    <title>Our Story</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/story.css">
 </head>
-<body>
-    <div class="container">
-        <h1>Our Story</h1>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">The Beginning</div>
-                <div class="timeline-content">
-                    <p>Where it all started...</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">First Meeting</div>
-                <div class="timeline-content">
-                    <p>The day our paths crossed...</p>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">Growing Together</div>
-                <div class="timeline-content">
-                    <p>Building memories day by day...</p>
-                </div>
-            </div>
-        </div>
-        <nav class="back-nav">
-            <a href="home.html">Back Home</a>
+<body class="story-page">
+    <header class="site-header">
+        <a class="brand" href="home.html"><span class="brand-heart" aria-hidden="true">♥</span><span>Happy Birthday</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+        <nav class="menu-panel" id="site-menu" aria-label="Main navigation" hidden>
+            <a href="home.html">Home</a><a href="wish.html">Birthday wishes</a><a href="memory.html">Memories</a><a href="home.html#music">Playlist</a><a href="our-story.html" aria-current="page">Our story</a><a href="love-letter.html">Love letter</a><a href="surprise.html">Surprise</a>
         </nav>
-    </div>
+    </header>
+    <main class="page-shell story-shell">
+        <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
+        <header class="page-heading">
+            <p class="page-kicker">A timeline in little moments</p>
+            <h1 class="page-title">Our Story</h1>
+            <p class="page-intro">Every photo holds a moment. Together, they make a story worth keeping.</p>
+            <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
+        </header>
+        <ol class="story-list" id="story-list" aria-label="Photo timeline"></ol>
+        <div class="story-end glass-panel"><span aria-hidden="true">♡</span><p>More little chapters are still waiting to be written.</p><a class="pill-link" href="love-letter.html">A note for you <span aria-hidden="true">→</span></a></div>
+    </main>
+    <footer class="site-footer"><p>Here’s to everything still ahead <span aria-hidden="true">♥</span></p></footer>
     <script src="js/main.js"></script>
     <script src="js/story.js"></script>
 </body>

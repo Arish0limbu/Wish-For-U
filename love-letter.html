@@ -3,26 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Letter - Wish For U</title>
+    <meta name="theme-color" content="#fcebec">
+    <title>A Love Letter for Budi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/letter.css">
 </head>
-<body>
-    <div class="container">
-        <div class="letter">
-            <h1>My Love Letter</h1>
-            <div class="letter-content">
-                <p>Dear You,</p>
-                <p>Words cannot express how much you mean to me. Every day with you is a blessing, and I cherish every moment we spend together.</p>
-                <p>You are my sunshine, my everything. I love you more than words can say.</p>
-                <p>Forever yours,</p>
-                <p>Me</p>
-            </div>
-        </div>
-        <nav class="back-nav">
-            <a href="home.html">Back Home</a>
+<body class="letter-page">
+    <header class="site-header">
+        <a class="brand" href="home.html"><span class="brand-heart" aria-hidden="true">♥</span><span>Happy Birthday</span></a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-menu"><span></span><span></span><span></span></button>
+        <nav class="menu-panel" id="site-menu" aria-label="Main navigation" hidden>
+            <a href="home.html">Home</a><a href="wish.html">Birthday wishes</a><a href="memory.html">Memories</a><a href="home.html#music">Playlist</a><a href="our-story.html">Our story</a><a href="love-letter.html" aria-current="page">Love letter</a><a href="surprise.html">Surprise</a>
         </nav>
-    </div>
+    </header>
+    <main class="page-shell letter-shell">
+        <a class="page-return" href="home.html"><span aria-hidden="true">←</span> Back to your birthday page</a>
+        <header class="page-heading">
+            <p class="page-kicker">A few words from my heart</p>
+            <h1 class="page-title">A Letter for You</h1>
+            <p class="page-intro">There are things I want you to know today, and every day.</p>
+            <div class="page-heart-rule" aria-hidden="true"><span>♥</span></div>
+        </header>
+        <section class="letter-scene" aria-label="A birthday letter">
+            <div class="letter-envelope" id="letter-envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-paper-edge"></div>
+                <div class="envelope-front"></div>
+                <button class="letter-seal" id="open-letter" type="button" aria-expanded="false" aria-controls="love-letter"><span aria-hidden="true">♥</span><span class="sr-only">Open the letter</span></button>
+                <p class="envelope-address">For Budi, with love</p>
+            </div>
+            <p class="letter-prompt" id="letter-prompt">Tap the little heart to open your letter</p>
+            <article class="letter-paper" id="love-letter" aria-hidden="true" hidden>
+                <div class="letter-paper-top"><span>♡</span><span>On your birthday</span><span>♡</span></div>
+                <p class="letter-salutation">Dear Budi,</p>
+                <p>Happy birthday to the person who makes ordinary days feel special. I hope this year brings you new reasons to smile, dreams that make you excited for tomorrow, and all the kindness you give to others coming back to you.</p>
+                <p>I am grateful for every little moment we share: the laughter, the quiet days, and the memories that keep finding their way into my favorite thoughts. You make my world warmer just by being you.</p>
+                <p>Keep being the wonderful person you are. I will always be cheering for you, today and in every chapter still to come.</p>
+                <p class="letter-closing">Happy Birthday, my love.</p>
+                <p class="letter-signature">Always, Arish <span aria-hidden="true">♥</span></p>
+                <button class="letter-close" id="close-letter" type="button">Fold the letter <span aria-hidden="true">↗</span></button>
+            </article>
+        </section>
+    </main>
+    <footer class="site-footer"><p>With love, on your birthday and always <span aria-hidden="true">♥</span></p></footer>
     <script src="js/main.js"></script>
     <script src="js/letter.js"></script>
 </body>
