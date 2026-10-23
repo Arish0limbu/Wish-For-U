@@ -1,0 +1,25 @@
+# Images
+images/*.jpg
+images/*.png
+images/*.jpeg
+
+# Music
+music/*.mp3
+music/*.wav
+
+# Assets
+assets/icons/*
+assets/fonts/*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
