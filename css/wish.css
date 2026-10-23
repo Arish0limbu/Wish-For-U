@@ -1,26 +1,42 @@
 .wishes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .wish-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 15px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
-.wish-card:hover {
-    transform: translateY(-10px);
+.wish-card:hover, .wish-card:active {
+    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .wish-card p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .wishes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .wish-card {
+        padding: 2rem;
+    }
+
+    .wish-card p {
+        font-size: 1.2rem;
+    }
 }
