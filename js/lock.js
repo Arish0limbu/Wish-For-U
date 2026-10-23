@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 400);
 
         setTimeout(() => {
-            window.location.href = 'home.html';
+            window.location.href = 'site.html';
         }, 800);
     }
 

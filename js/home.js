@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     const tracks = [
-        { title: 'Photograph — Ed Sheeran', file: 'Ed Sheeran - Photograph (Lyrics).mp3' },
         { title: 'Fijeko Kesh — Ekdev Limbu', file: 'Ekdev Limbu - Fijeko Kesh.mp3' },
         { title: 'Bardali — Sushant KC ft. Indrakala Rai', file: 'Sushant KC - Bardali ft. Indrakala Rai (Official Music Video).mp3' },
         { title: 'Timi Sangai — Apurva Tamang', file: 'Timi Sangai - Apurva Tamang _ Official MV _.mp3' },
         { title: 'Timro Pratiksa — Shallum Lama', file: 'Timro Pratiksa - Shallum Lama [To Mini][Official Video].mp3' },
-        { title: 'Kasari — Yabesh Thapa', file: 'Yabesh Thapa - Kasari _ कसरी.mp3' }
+        { title: 'Kasari — Yabesh Thapa', file: 'Yabesh Thapa - Kasari _ कसरी.mp3' },
+        { title: 'Photograph — Ed Sheeran', file: 'Ed Sheeran - Photograph (Lyrics).mp3' }
     ];
     const musicStateKey = 'wishForU.musicState';
 
@@ -31,7 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.removeItem('wishForU.startMusicOnHome');
     } catch (error) { /* Storage may be disabled. */ }
 
-    const audio = document.getElementById('birthday-audio');
+    const localAudio = document.getElementById('birthday-audio');
+    let sharedAudio = null;
+    try {
+        if (window.parent !== window) sharedAudio = window.parent.document.getElementById('birthday-audio');
+    } catch (error) { /* The page may be opened outside the shared site shell. */ }
+    const audio = sharedAudio || localAudio;
+    const isSharedAudio = Boolean(sharedAudio);
     const playButton = document.getElementById('play-button');
     const previousButton = document.getElementById('previous-button');
     const nextButton = document.getElementById('next-button');
@@ -49,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let isRepeating = Boolean(savedState && savedState.repeat);
     let pendingRestoreTime = savedState && Number.isFinite(savedState.currentTime) ? Math.max(0, savedState.currentTime) : 0;
     let lastSavedAt = 0;
+    if (isSharedAudio) pendingRestoreTime = 0;
 
     function formatTime(seconds) {
         if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -69,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
         seekBar.value = '0';
         seekBar.style.setProperty('--progress', '0%');
         if (shouldPlay) playAudio();
+        saveMusicState();
     }
 
     function setPlaying(playing) {
@@ -134,28 +142,39 @@ document.addEventListener('DOMContentLoaded', function () {
         seekBar.style.setProperty('--progress', seekBar.value + '%');
     });
 
-    audio.addEventListener('play', function () { setPlaying(true); saveMusicState(); });
-    audio.addEventListener('pause', function () { setPlaying(false); saveMusicState(); });
-    audio.addEventListener('loadedmetadata', function () {
+    if (audio.__wishForUHomeHandlers) {
+        Object.keys(audio.__wishForUHomeHandlers).forEach(function (eventName) {
+            audio.removeEventListener(eventName, audio.__wishForUHomeHandlers[eventName]);
+        });
+    }
+    const homeAudioHandlers = {
+        play: function () { setPlaying(true); saveMusicState(); },
+        pause: function () { setPlaying(false); saveMusicState(); },
+        loadedmetadata: function () {
         duration.textContent = formatTime(audio.duration);
         if (pendingRestoreTime > 0 && pendingRestoreTime < audio.duration) {
             audio.currentTime = pendingRestoreTime;
             pendingRestoreTime = 0;
         }
+        },
+        timeupdate: function () {
+            currentTime.textContent = formatTime(audio.currentTime);
+            if (Number.isFinite(audio.duration) && audio.duration > 0) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                seekBar.value = String(progress);
+                seekBar.style.setProperty('--progress', progress + '%');
+            }
+            if (Date.now() - lastSavedAt > 4000) {
+                lastSavedAt = Date.now();
+                saveMusicState();
+            }
+        },
+        ended: function () { if (!isSharedAudio) moveToNextTrack(true); }
+    };
+    Object.keys(homeAudioHandlers).forEach(function (eventName) {
+        audio.addEventListener(eventName, homeAudioHandlers[eventName]);
     });
-    audio.addEventListener('timeupdate', function () {
-        currentTime.textContent = formatTime(audio.currentTime);
-        if (Number.isFinite(audio.duration) && audio.duration > 0) {
-            const progress = (audio.currentTime / audio.duration) * 100;
-            seekBar.value = String(progress);
-            seekBar.style.setProperty('--progress', progress + '%');
-        }
-        if (Date.now() - lastSavedAt > 4000) {
-            lastSavedAt = Date.now();
-            saveMusicState();
-        }
-    });
-    audio.addEventListener('ended', function () { moveToNextTrack(true); });
+    audio.__wishForUHomeHandlers = homeAudioHandlers;
 
     if (menuToggle && menu) {
         menuToggle.addEventListener('click', function () {
@@ -182,10 +201,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const initialTrack = currentTrack;
     const initialPosition = pendingRestoreTime;
-    setTrack(initialTrack, false, initialPosition);
-    audio.loop = isRepeating;
+    if (!isSharedAudio || !audio.src) {
+        setTrack(initialTrack, false, initialPosition);
+        audio.loop = isRepeating;
+        if (startFromUnlock || !savedState || savedState.playing) playAudio();
+    } else {
+        trackName.textContent = tracks[currentTrack].title;
+        audio.loop = isRepeating;
+        setPlaying(!audio.paused);
+        currentTime.textContent = formatTime(audio.currentTime);
+        duration.textContent = formatTime(audio.duration);
+        if (Number.isFinite(audio.duration) && audio.duration > 0) {
+            seekBar.value = String(audio.currentTime / audio.duration * 100);
+            seekBar.style.setProperty('--progress', seekBar.value + '%');
+        }
+    }
     shuffleButton.setAttribute('aria-pressed', String(isShuffling));
     repeatButton.setAttribute('aria-pressed', String(isRepeating));
-    if (startFromUnlock || !savedState || savedState.playing) playAudio();
-    window.addEventListener('pagehide', saveMusicState);
+    window.addEventListener('pagehide', function () {
+        saveMusicState();
+        Object.keys(homeAudioHandlers).forEach(function (eventName) {
+            audio.removeEventListener(eventName, homeAudioHandlers[eventName]);
+        });
+        if (audio.__wishForUHomeHandlers === homeAudioHandlers) delete audio.__wishForUHomeHandlers;
+    });
 });

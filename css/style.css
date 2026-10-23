@@ -98,31 +98,36 @@ img { max-width: 100%; }
     z-index: 100;
     right: max(.85rem, env(safe-area-inset-right, 0px));
     bottom: max(.85rem, env(safe-area-inset-bottom, 0px));
-    width: min(285px, calc(100vw - 1.5rem));
-    padding: .8rem .9rem .75rem;
+    width: min(235px, calc(100vw - 1.2rem));
+    padding: .6rem .7rem .55rem;
     border: 1px solid rgba(177, 76, 99, .2);
     border-radius: 20px;
     color: #71424a;
-    background: rgba(255, 249, 248, .94);
-    box-shadow: 0 12px 34px rgba(104, 40, 56, .22), inset 0 1px 0 rgba(255,255,255,.85);
-    backdrop-filter: blur(14px);
+    background: rgba(255, 249, 248, .78);
+    box-shadow: 0 8px 24px rgba(104, 40, 56, .16), inset 0 1px 0 rgba(255,255,255,.72);
+    backdrop-filter: blur(12px);
 }
 .floating-music audio { display: none; }
-.floating-music-heading { min-width: 0; display: flex; align-items: center; gap: .65rem; }
-.floating-music-note { width: 37px; height: 37px; flex: 0 0 37px; display: grid; place-items: center; border-radius: 12px; color: #fff; background: linear-gradient(140deg, #cf6a80, #ad425c); font-size: 1.3rem; }
+.floating-music-heading { min-width: 0; display: flex; align-items: center; gap: .5rem; }
+.floating-music-note { width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; border-radius: 10px; color: #fff; background: linear-gradient(140deg, #cf6a80, #ad425c); font-size: 1.05rem; }
 .floating-music-track { min-width: 0; display: grid; gap: .12rem; }
-.floating-music-label { color: #a1666e; font-size: .65rem; }
-.floating-music-track strong { overflow: hidden; color: #713744; font: 600 1rem/1.2 'Dancing Script', cursive; text-overflow: ellipsis; white-space: nowrap; }
-.floating-music-seek { width: 100%; height: 4px; margin: .7rem 0 .35rem; display: block; appearance: none; border-radius: 8px; background: linear-gradient(to right, #c65a72 0%, #c65a72 var(--progress, 0%), rgba(197, 112, 129, .25) var(--progress, 0%), rgba(197, 112, 129, .25) 100%); cursor: pointer; }
-.floating-music-seek::-webkit-slider-thumb { width: 10px; height: 10px; appearance: none; border: 0; border-radius: 50%; background: #b94e67; }
-.floating-music-seek::-moz-range-thumb { width: 10px; height: 10px; border: 0; border-radius: 50%; background: #b94e67; }
+.floating-music-label { color: #a1666e; font-size: .58rem; }
+.floating-music-track strong { overflow: hidden; color: #713744; font: 600 .88rem/1.2 'Dancing Script', cursive; text-overflow: ellipsis; white-space: nowrap; }
+.floating-music-seek { width: 100%; height: 3px; margin: .5rem 0 .25rem; display: block; appearance: none; border-radius: 8px; background: linear-gradient(to right, #c65a72 0%, #c65a72 var(--progress, 0%), rgba(197, 112, 129, .25) var(--progress, 0%), rgba(197, 112, 129, .25) 100%); cursor: pointer; }
+.floating-music-seek::-webkit-slider-thumb { width: 8px; height: 8px; appearance: none; border: 0; border-radius: 50%; background: #b94e67; }
+.floating-music-seek::-moz-range-thumb { width: 8px; height: 8px; border: 0; border-radius: 50%; background: #b94e67; }
 .floating-music-bottom { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
-.floating-music-controls { display: flex; align-items: center; gap: .45rem; }
-.floating-music-controls button { min-width: 30px; height: 31px; padding: 0 .25rem; border: 0; border-radius: 999px; color: #ad4961; background: transparent; font-size: .85rem; cursor: pointer; }
+.floating-music-controls { display: flex; align-items: center; gap: .3rem; }
+.floating-music-controls button { min-width: 26px; height: 27px; padding: 0 .2rem; border: 0; border-radius: 999px; color: #ad4961; background: transparent; font-size: .75rem; cursor: pointer; }
 .floating-music-controls button:hover { background: #f8e4e7; }
-.floating-music-controls .floating-music-play { width: 37px; height: 37px; color: #fff; background: linear-gradient(140deg, #cf6a80, #ad425c); box-shadow: 0 4px 12px rgba(159, 59, 81, .18); font-size: .9rem; }
+.floating-music-controls .floating-music-play { width: 32px; height: 32px; color: #fff; background: linear-gradient(140deg, #cf6a80, #ad425c); box-shadow: 0 4px 12px rgba(159, 59, 81, .16); font-size: .78rem; }
 .floating-music-controls .floating-music-play:hover { background: #ad425c; }
-.floating-music-time { color: #8d5360; font-size: .68rem; font-variant-numeric: tabular-nums; }
+.floating-music-time { color: #8d5360; font-size: .62rem; font-variant-numeric: tabular-nums; }
+.site-shell-page { width: 100%; height: 100vh; height: 100dvh; min-height: 0; margin: 0; padding: 0; overflow: hidden; background: #fcebec; }
+.site-shell-page #birthday-site-frame { width: 100%; height: 100vh; height: 100dvh; display: block; border: 0; background: transparent; }
+.site-shell-page:not(.site-shell-ready) .floating-music { visibility: hidden; }
+.site-shell-page.is-home-page { padding-bottom: 0; }
+.site-shell-page.is-home-page .floating-music { display: none; }
 :focus-visible { outline: 3px solid rgba(166, 56, 81, .56); outline-offset: 4px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
@@ -134,7 +139,7 @@ img { max-width: 100%; }
     .page-shell { width: min(calc(100% - 1.2rem), 1020px); padding-top: .3rem; }
     .page-heading { margin-bottom: 1.4rem; }
     .page-intro { font-size: .9rem; }
-    .floating-music { right: max(.65rem, env(safe-area-inset-right, 0px)); bottom: max(.65rem, env(safe-area-inset-bottom, 0px)); width: min(255px, calc(100vw - 1.2rem)); padding: .7rem .75rem .65rem; }
+    .floating-music { right: max(.55rem, env(safe-area-inset-right, 0px)); bottom: max(.55rem, env(safe-area-inset-bottom, 0px)); width: min(225px, calc(100vw - 1rem)); padding: .55rem .6rem .5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

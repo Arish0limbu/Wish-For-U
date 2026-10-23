@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
         menuToggle.setAttribute('aria-label', 'Open navigation');
     }
 
-    if (menuToggle && menu) {
+    const embeddedHome = window.top !== window.self && window.location.pathname.toLowerCase().endsWith('/home.html');
+    if (menuToggle && menu && !embeddedHome) {
         menuToggle.addEventListener('click', function () {
             const open = menuToggle.getAttribute('aria-expanded') === 'true';
             menu.hidden = open;
@@ -27,17 +28,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    if (window.top !== window.self) return;
+
     const tracks = [
-        { title: 'Photograph — Ed Sheeran', file: 'Ed Sheeran - Photograph (Lyrics).mp3' },
         { title: 'Fijeko Kesh — Ekdev Limbu', file: 'Ekdev Limbu - Fijeko Kesh.mp3' },
         { title: 'Bardali — Sushant KC ft. Indrakala Rai', file: 'Sushant KC - Bardali ft. Indrakala Rai (Official Music Video).mp3' },
         { title: 'Timi Sangai — Apurva Tamang', file: 'Timi Sangai - Apurva Tamang _ Official MV _.mp3' },
         { title: 'Timro Pratiksa — Shallum Lama', file: 'Timro Pratiksa - Shallum Lama [To Mini][Official Video].mp3' },
-        { title: 'Kasari — Yabesh Thapa', file: 'Yabesh Thapa - Kasari _ कसरी.mp3' }
+        { title: 'Kasari — Yabesh Thapa', file: 'Yabesh Thapa - Kasari _ कसरी.mp3' },
+        { title: 'Photograph — Ed Sheeran', file: 'Ed Sheeran - Photograph (Lyrics).mp3' }
     ];
     const musicStateKey = 'wishForU.musicState';
     let savedState = null;
     try { savedState = JSON.parse(localStorage.getItem(musicStateKey) || 'null'); } catch (error) { /* Storage may be disabled. */ }
+    let startFromUnlock = false;
+    try {
+        startFromUnlock = sessionStorage.getItem('wishForU.startMusicOnHome') === 'true';
+        sessionStorage.removeItem('wishForU.startMusicOnHome');
+    } catch (error) { /* Storage may be disabled. */ }
 
     const player = document.createElement('aside');
     player.className = 'floating-music';
@@ -46,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         '<input class="floating-music-seek" id="floating-seek" type="range" min="0" max="100" value="0" aria-label="Song progress">' +
         '<div class="floating-music-bottom"><div class="floating-music-controls"><button type="button" id="floating-previous" aria-label="Previous song">|‹</button><button class="floating-music-play" type="button" id="floating-play" aria-label="Play"><span aria-hidden="true">▶</span></button><button type="button" id="floating-next" aria-label="Next song">›|</button></div><span class="floating-music-time" id="floating-time">0:00</span></div>';
     const audio = document.createElement('audio');
+    audio.id = 'birthday-audio';
     audio.preload = 'metadata';
     player.append(audio);
     document.body.append(player);
@@ -99,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function () {
         audio.loop = isRepeating;
         audio.load();
         if (shouldPlay) playAudio();
+        saveState();
     }
     function nextTrack(shouldPlay) {
         const latest = readLatestState();
@@ -136,6 +146,38 @@ document.addEventListener('DOMContentLoaded', function () {
     audio.addEventListener('ended', function () { nextTrack(true); });
     audio.addEventListener('error', function () { title.textContent = 'Song unavailable'; updatePlayButton(false); });
     window.addEventListener('pagehide', function () { saveState(); });
+    window.addEventListener('storage', function (event) {
+        if (event.key !== musicStateKey || !event.newValue) return;
+        try {
+            const nextState = JSON.parse(event.newValue);
+            if (!Number.isInteger(nextState.trackIndex)) return;
+            currentTrack = (nextState.trackIndex + tracks.length) % tracks.length;
+            title.textContent = tracks[currentTrack].title;
+            isRepeating = Boolean(nextState.repeat);
+            audio.loop = isRepeating;
+        } catch (error) { /* Ignore malformed saved state. */ }
+    });
 
-    setTrack(currentTrack, Boolean(savedState && savedState.playing), pendingTime);
+    setTrack(currentTrack, startFromUnlock || Boolean(savedState && savedState.playing), pendingTime);
+
+    const siteFrame = document.getElementById('birthday-site-frame');
+    if (siteFrame) {
+        function updateEmbeddedPage() {
+            let frameWindow;
+            let frameDocument;
+            try {
+                frameWindow = siteFrame.contentWindow;
+                frameDocument = siteFrame.contentDocument;
+                if (!frameWindow || !frameDocument) return;
+            } catch (error) { return; }
+
+            const isHome = frameWindow.location.pathname.toLowerCase().endsWith('/home.html');
+            document.body.classList.toggle('is-home-page', isHome);
+            document.body.classList.add('site-shell-ready');
+            document.body.classList.toggle('has-floating-music', !isHome);
+            if (frameDocument.title) document.title = frameDocument.title;
+        }
+        siteFrame.addEventListener('load', updateEmbeddedPage);
+        siteFrame.src = siteFrame.dataset.startPage || 'home.html';
+    }
 });
