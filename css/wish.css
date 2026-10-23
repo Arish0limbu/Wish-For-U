@@ -6,23 +6,26 @@
 }
 
 .wish-card {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 15px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .wish-card:hover, .wish-card:active {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .wish-card p {
     font-size: 1rem;
     line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 768px) {

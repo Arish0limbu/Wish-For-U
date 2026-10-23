@@ -1,16 +1,18 @@
 .surprise-box {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 15px;
     max-width: 100%;
     margin: 1rem auto;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .surprise-box p {
     font-size: 1rem;
     margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 #surprise-btn {
@@ -38,15 +40,17 @@
 #surprise-content {
     margin-top: 1.5rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     animation: fadeIn 0.5s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 #surprise-content p {
     font-size: 1.2rem;
     font-weight: bold;
     line-height: 1.5;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes fadeIn {
