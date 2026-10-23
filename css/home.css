@@ -1,533 +1,392 @@
-/* Home Page Styles - Birthday Theme */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+    --berry: #a83d56;
+    --berry-dark: #77303d;
+    --rose: #c85c75;
+    --rose-light: #e8a5b1;
+    --ink: #71424a;
+    --paper: #fff8f7;
 }
 
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffe4e9 0%, #ffd1dc 50%, #ffb6c1 100%);
+    min-width: 320px;
     min-height: 100vh;
-    color: #4a4a4a;
-    position: relative;
+    margin: 0;
     overflow-x: hidden;
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    background-color: #fcebec;
+    background-image: url('../images/background.jpg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: scroll;
 }
+body, button, a { -webkit-tap-highlight-color: transparent; }
+a { color: inherit; }
+button { font: inherit; }
 
-/* Decorative background elements */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('../images/background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    opacity: 0.15;
-    z-index: -1;
-}
-
-/* Header */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(216, 27, 96, 0.1);
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.header-heart {
-    color: #d81b60;
-    font-size: 1.2rem;
-    animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-.header-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
-    color: #d81b60;
-    font-weight: 700;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-.menu-btn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: #d81b60;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-/* Hero Section */
-.hero {
+.site-header {
+    width: min(100%, 900px);
+    min-height: 82px;
+    margin: 0 auto;
+    padding: 1.35rem 3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6rem 3rem 4rem;
-    gap: 3rem;
-    min-height: 80vh;
-}
-
-.hero-content {
-    flex: 1;
-    max-width: 600px;
-}
-
-.hero-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 4.5rem;
-    color: #d81b60;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
-    display: inline-block;
+    z-index: 5;
 }
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    color: var(--berry);
+    text-decoration: none;
+    font: 700 clamp(1.6rem, 3.1vw, 2.15rem)/1 'Dancing Script', cursive;
+    white-space: nowrap;
+}
+.brand-heart { font: 1.55rem/1 sans-serif; color: #b74962; }
+.menu-toggle {
+    width: 48px;
+    height: 48px;
+    border: 0;
+    padding: 9px 5px;
+    background: transparent;
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    cursor: pointer;
+}
+.menu-toggle span {
+    width: 38px;
+    height: 3px;
+    display: block;
+    border-radius: 3px;
+    background: #a83d56;
+    transition: transform .2s ease, opacity .2s ease;
+}
+.menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(9px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-9px) rotate(-45deg); }
+.menu-panel {
+    position: absolute;
+    z-index: 10;
+    top: calc(100% - 4px);
+    right: 2.7rem;
+    min-width: 205px;
+    padding: .55rem;
+    border: 1px solid rgba(177, 76, 99, .12);
+    border-radius: 18px;
+    background: rgba(255, 248, 247, .96);
+    box-shadow: 0 15px 40px rgba(125, 45, 65, .16);
+    backdrop-filter: blur(12px);
+}
+.menu-panel[hidden] { display: none; }
+.menu-panel a {
+    display: block;
+    padding: .65rem .85rem;
+    color: var(--berry-dark);
+    text-decoration: none;
+    font-size: .9rem;
+    border-radius: 11px;
+}
+.menu-panel a:hover, .menu-panel a:focus-visible { background: #fbe4e7; outline: none; }
 
-.hero-title::after {
+.hero {
+    width: min(100%, 1160px);
+    min-height: 680px;
+    margin: 0 auto;
+    padding: 2.5rem clamp(2.5rem, 6.2vw, 5rem) 2rem;
+    display: grid;
+    grid-template-columns: minmax(350px, .92fr) minmax(390px, 1.08fr);
+    align-items: center;
+    gap: .2rem;
+    position: relative;
+}
+.hero-content { position: relative; z-index: 1; padding-top: .25rem; }
+.eyebrow {
+    margin: 0 0 1.1rem;
+    color: #a44a5c;
+    font-size: clamp(.9rem, 1.55vw, 1.15rem);
+    font-weight: 400;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.eyebrow span { padding: 0 .45rem; color: #bd5068; font-size: .9em; }
+.hero-title {
+    margin: 0;
+    color: var(--berry);
+    font: 400 clamp(5.6rem, 10.2vw, 7.6rem)/.83 'Great Vibes', 'Dancing Script', cursive;
+    letter-spacing: -.025em;
+    text-shadow: 0 2px 1px rgba(115, 45, 60, .04);
+}
+.title-flourish {
+    width: 180px;
+    height: 29px;
+    margin: .65rem 0 1rem 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #c65b72;
+    font: 2.1rem/1 'Dancing Script', cursive;
+}
+.title-flourish span { width: 55px; height: 2px; background: #c65b72; transform: rotate(-7deg); }
+.hero-copy {
+    max-width: 410px;
+    margin: .8rem 0 1.2rem;
+    color: #794b51;
+    font-size: clamp(.96rem, 1.45vw, 1.1rem);
+    font-weight: 400;
+    line-height: 1.8;
+}
+.primary-button {
+    min-width: 260px;
+    min-height: 54px;
+    margin-top: .1rem;
+    padding: .75rem 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.3rem;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 999px;
+    background: linear-gradient(110deg, #ce687e, #b84c66);
+    box-shadow: 0 7px 18px rgba(164, 59, 82, .16);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.primary-button span { font-size: 1.5rem; line-height: .8; }
+.primary-button:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(164, 59, 82, .22); }
+.hero-art { width: 100%; display: flex; align-items: center; justify-content: center; margin-left: -1.1rem; }
+.hero-art img {
+    width: 112%;
+    max-width: 620px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 16px rgba(148, 55, 72, .1));
+}
+.floating-heart {
+    position: absolute;
+    z-index: 2;
+    color: #c75f77;
+    font: 2.6rem/1 'Dancing Script', cursive;
+    text-shadow: 0 1px 0 #fff5f4;
+    pointer-events: none;
+}
+.floating-heart-one { top: 25%; left: 47%; transform: rotate(-13deg); }
+.floating-heart-two { top: 21%; right: 3%; font-size: 2.2rem; transform: rotate(12deg); }
+.floating-heart-three { bottom: 32%; left: 2%; font-size: 2.2rem; transform: rotate(-20deg); }
+.floating-heart-four { bottom: 34%; right: 2%; font-size: 2rem; transform: rotate(12deg); }
+.heart-sticker { position: absolute; z-index: 2; right: 7%; bottom: 19%; width: 27px; height: 27px; object-fit: contain; opacity: .68; transform: rotate(-17deg); pointer-events: none; }
+
+.features {
+    width: min(calc(100% - 3rem), 900px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+    scroll-margin-top: 1rem;
+}
+.feature-card {
+    min-height: 220px;
+    padding: 1.05rem .45rem .7rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    position: relative;
+    isolation: isolate;
+    transition: transform .2s ease;
+}
+.feature-card::before {
     content: '';
     position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 3px;
-    background: #d81b60;
-    border-radius: 2px;
+    z-index: -1;
+    inset: 0;
+    border-radius: 48% 52% 51% 49% / 44% 48% 52% 56%;
+    background: radial-gradient(ellipse at center, rgba(245, 202, 207, .42), rgba(246, 211, 214, .2) 68%, rgba(255,255,255,0) 72%);
+    transform: rotate(-4deg);
 }
+.feature-card:nth-child(even)::before { transform: rotate(5deg); }
+.feature-card:hover { transform: translateY(-5px); }
+.feature-icon { width: 45px; height: 45px; margin-bottom: .45rem; color: #bb536b; }
+.feature-icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.feature-title { color: #ad4c63; font: 700 1.6rem/1.1 'Dancing Script', cursive; }
+.feature-copy { min-height: 48px; margin-top: .7rem; color: #89535b; font-size: .91rem; line-height: 1.7; }
+.feature-arrow { margin-top: .1rem; color: #c15b71; font-size: 1.7rem; line-height: 1; transition: transform .2s ease; }
+.feature-card:hover .feature-arrow { transform: translateX(4px); }
 
-.title-heart {
-    font-size: 2rem;
-    color: #ff6b6b;
-}
-
-.hero-subtitle {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    color: #880e4f;
-    margin-bottom: 1.5rem;
-    font-weight: 700;
-}
-
-.hero-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #5a5a5a;
-    margin-bottom: 2rem;
-    font-weight: 300;
-}
-
-.hero-button {
-    padding: 1rem 2.5rem;
-    background: linear-gradient(135deg, #d81b60, #f48fb1);
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.3);
-    font-family: 'Poppins', sans-serif;
-}
-
-.hero-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.4);
-}
-
-.hero-images {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 500px;
-}
-
-.hero-image-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.hero-main-image {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(216, 27, 96, 0.2);
-    max-height: 450px;
-}
-
-/* Cards Section */
-.cards-section {
+.heartfelt-row {
+    width: min(100%, 1060px);
+    margin: 1rem auto 0;
+    padding: 2.15rem 3rem 2.55rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    padding: 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
 }
-
-.card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 5px 20px rgba(216, 27, 96, 0.1);
-    border: 1px solid rgba(216, 27, 96, 0.1);
+.heartfelt-note { padding: .35rem .15rem; }
+.heartfelt-note h2 {
+    margin: 0;
+    color: #aa485e;
+    font: 400 clamp(2.7rem, 5vw, 3.7rem)/1.05 'Great Vibes', 'Dancing Script', cursive;
 }
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(216, 27, 96, 0.2);
-    background: rgba(255, 255, 255, 0.85);
+.heartfelt-note h2 span { color: #c75d73; font: 700 .8em 'Dancing Script', cursive; }
+.note-underline { width: 180px; height: 2px; margin: .6rem 0 1rem 3rem; background: #bc5268; transform: rotate(-8deg); }
+.heartfelt-note > p:not(.birthday-signoff):not(.signature) {
+    margin: 0;
+    color: #96636a;
+    font-size: clamp(.98rem, 1.55vw, 1.1rem);
+    line-height: 1.9;
 }
+.birthday-signoff { margin: 1.15rem 0 .7rem; color: #672c38; font: 700 clamp(1.8rem, 3.2vw, 2.3rem)/1.2 'Dancing Script', cursive; }
+.birthday-signoff span, .signature span { color: #bd5269; }
+.signature { margin: 0; color: #a46b71; font-size: 1rem; }
 
-.card-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.card-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: #d81b60;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-}
-
-.card-description {
-    font-size: 0.9rem;
-    color: #6a6a6a;
-    margin-bottom: 1rem;
-    font-weight: 300;
-}
-
-.card-arrow {
-    font-size: 1.5rem;
-    color: #d81b60;
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.3s ease;
-}
-
-.card:hover .card-arrow {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Just for You and Music Player Row */
-.content-row {
-    display: flex;
-    gap: 3rem;
-    padding: 4rem 3rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: flex-start;
-}
-
-/* Just for You Section */
-.just-for-you {
-    flex: 1;
-    text-align: left;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 0 5px 20px rgba(216, 27, 96, 0.1);
-}
-
-.just-for-you-title {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3rem;
-    color: #d81b60;
-    margin-bottom: 2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.just-for-you-text {
-    font-size: 1.2rem;
-    line-height: 2;
-    color: #5a5a5a;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    font-style: italic;
-}
-
-.just-for-you-signature {
-    margin-top: 2rem;
-}
-
-.signature-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
-    color: #d81b60;
-    margin: 0.5rem 0;
-    font-weight: 700;
-}
-
-/* Music Player Section */
 .music-player {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 2rem;
-    border-radius: 20px;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(216, 27, 96, 0.15);
-    border: 1px solid rgba(216, 27, 96, 0.1);
-}
-
-.music-player-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.music-thumbnail {
-    width: 80px;
-    height: 80px;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(216, 27, 96, 0.2);
-}
-
-.music-thumbnail img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    min-height: 360px;
+    padding: 1.9rem 2rem 1.25rem;
+    border: 1px solid rgba(179, 97, 112, .12);
+    border-radius: 27px;
+    background: rgba(255, 249, 248, .7);
+    box-shadow: 0 8px 28px rgba(135, 57, 72, .1), inset 0 1px 0 rgba(255,255,255,.65);
+    backdrop-filter: blur(9px);
 }
-
-.music-info {
-    flex: 1;
-}
-
-.music-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
-    color: #d81b60;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-}
-
-.music-subtitle {
-    font-size: 0.9rem;
-    color: #6a6a6a;
-    font-weight: 300;
-}
-
-.music-progress {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.progress-time {
-    font-size: 0.85rem;
-    color: #880e4f;
-    font-weight: 500;
-    min-width: 40px;
-}
-
-.progress-bar {
-    flex: 1;
-    height: 6px;
-    background: rgba(216, 27, 96, 0.2);
-    border-radius: 3px;
+.player-heading { min-height: 112px; display: flex; align-items: center; gap: 1.1rem; }
+.album-art {
+    width: 106px;
+    height: 106px;
+    flex: 0 0 106px;
+    position: relative;
     overflow: hidden;
+    border-radius: 17px;
+    background: linear-gradient(180deg, #e89b8e 0%, #c5787c 38%, #624759 67%, #292b3a 100%);
+    box-shadow: 0 5px 14px rgba(113, 52, 68, .18);
+}
+.album-art::before { content: ''; position: absolute; inset: 48% -12% -18%; background: #312b3c; clip-path: polygon(0 45%, 34% 0, 61% 47%, 78% 21%, 100% 56%, 100% 100%, 0 100%); }
+.album-art::after { content: ''; position: absolute; right: -14%; top: 44%; width: 74%; height: 26%; border-radius: 50%; background: rgba(255, 214, 183, .24); filter: blur(8px); }
+.album-sun { position: absolute; top: 23%; left: 24%; width: 28px; height: 28px; border-radius: 50%; background: #ffcfaa; box-shadow: 0 0 21px 7px rgba(255, 194, 162, .38); }
+.album-person { position: absolute; z-index: 1; left: 47%; bottom: 13%; width: 12px; height: 31px; border-radius: 50% 50% 2px 2px; background: #191e2b; }
+.album-person::before { content: ''; position: absolute; top: -9px; left: 2px; width: 9px; height: 9px; border-radius: 50%; background: inherit; }
+.track-heading { min-width: 0; }
+.playlist-title { margin: 0 0 .35rem; color: #632e3b; font: 700 clamp(1.35rem, 2.4vw, 1.75rem)/1.15 'Dancing Script', cursive; white-space: nowrap; }
+.playlist-subtitle { margin: 0; color: #a1666e; font-size: .82rem; line-height: 1.55; }
+.playlist-subtitle span:last-child { color: #bd536a; }
+.track-name { max-width: 250px; margin: .25rem 0 0; overflow: hidden; color: #9e5964; font-size: .74rem; text-overflow: ellipsis; white-space: nowrap; }
+.player-progress { margin: 1.15rem 0 .65rem; }
+.seek-bar { width: 100%; height: 5px; display: block; margin: 0; appearance: none; border-radius: 10px; outline: none; background: linear-gradient(to right, #c65a72 0%, #c65a72 var(--progress, 0%), rgba(197, 112, 129, .25) var(--progress, 0%), rgba(197, 112, 129, .25) 100%); cursor: pointer; }
+.seek-bar::-webkit-slider-thumb { width: 11px; height: 11px; appearance: none; border: 0; border-radius: 50%; background: #c65a72; }
+.seek-bar::-moz-range-thumb { width: 11px; height: 11px; border: 0; border-radius: 50%; background: #c65a72; }
+.time-row { margin-top: .55rem; display: flex; justify-content: space-between; color: #8d5360; font-size: .77rem; }
+.player-controls { display: flex; align-items: center; justify-content: space-between; gap: .7rem; margin: .25rem 0 .8rem; }
+.control-button, .play-button { padding: 0; border: 0; display: grid; place-items: center; color: #b34d65; background: transparent; cursor: pointer; transition: transform .18s ease, opacity .18s ease; }
+.control-button { width: 36px; height: 40px; opacity: .9; }
+.control-button svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.control-button:hover { transform: scale(1.1); }
+.control-button[aria-pressed="true"] { color: #7d2f43; filter: drop-shadow(0 0 4px rgba(190, 73, 101, .25)); }
+.play-button { width: 68px; height: 68px; flex: 0 0 68px; border-radius: 50%; color: #fff; background: linear-gradient(140deg, #cd667d, #b64863); box-shadow: 0 6px 16px rgba(159, 59, 81, .2); }
+.play-button:hover { transform: scale(1.06); }
+.play-button svg { width: 29px; height: 29px; fill: currentColor; }
+.play-button .play-icon { margin-left: 3px; }
+.player-footer { margin: .65rem 0 0; text-align: center; color: #783b48; font: 700 1.05rem/1.3 'Dancing Script', cursive; }
+.player-footer span { color: #bd536a; }
+.site-footer { min-height: 145px; padding: .65rem 1rem 2.4rem; text-align: center; color: #a4646e; font-size: .9rem; }
+.site-footer p { margin: .6rem 0 .65rem; }
+.footer-flourish { width: 215px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; color: #bd526a; font-size: 1.3rem; }
+.footer-flourish span { width: 78px; height: 1px; background: #ce8490; }
+.footer-heart { color: #bd526a; font-size: 1.1rem; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+:focus-visible { outline: 3px solid rgba(166, 56, 81, .56); outline-offset: 4px; }
+
+@media (max-width: 800px) {
+    .site-header { min-height: 72px; padding: 1rem 1.4rem; }
+    .menu-panel { right: 1.25rem; }
+    .hero { min-height: 600px; grid-template-columns: minmax(300px, .92fr) minmax(320px, 1.08fr); padding: 2rem 1.5rem; }
+    .hero-title { font-size: clamp(5rem, 11vw, 6.7rem); }
+    .hero-art { margin-left: -1.5rem; }
+    .hero-art img { width: 120%; }
+    .eyebrow { letter-spacing: .11em; }
+    .features { width: min(calc(100% - 2rem), 760px); gap: .4rem; }
+    .feature-card { min-height: 195px; }
+    .feature-title { font-size: 1.45rem; }
+    .feature-copy { font-size: .82rem; }
+    .heartfelt-row { gap: 1.7rem; padding: 2rem 1.7rem; }
+    .music-player { padding-inline: 1.35rem; }
+    .album-art { width: 86px; height: 86px; flex-basis: 86px; }
+    .player-heading { min-height: 90px; gap: .8rem; }
+    .playlist-title { font-size: 1.45rem; }
 }
 
-.progress-fill {
-    width: 30%;
-    height: 100%;
-    background: linear-gradient(90deg, #d81b60, #f48fb1);
-    border-radius: 3px;
+@media (max-width: 720px) {
+    body { background-size: auto 100%; background-position: center top; background-attachment: scroll; }
+    .site-header { min-height: 70px; padding: .8rem 1.1rem; }
+    .brand { font-size: 1.65rem; gap: .5rem; }
+    .brand-heart { font-size: 1.3rem; }
+    .menu-toggle { transform: scale(.88); transform-origin: right center; }
+    .hero { min-height: 0; padding: 2rem 1.25rem .8rem; display: flex; flex-direction: column; gap: .25rem; text-align: center; }
+    .hero-content { width: 100%; padding: 0; }
+    .eyebrow { margin-bottom: .75rem; font-size: .83rem; letter-spacing: .12em; }
+    .hero-title { font-size: clamp(5rem, 19vw, 7.4rem); line-height: .82; }
+    .title-flourish { width: 150px; margin: .65rem auto .65rem; }
+    .title-flourish span { width: 43px; }
+    .hero-copy { max-width: 390px; margin: .55rem auto 1rem; font-size: .95rem; line-height: 1.7; }
+    .desktop-break { display: none; }
+    .primary-button { min-width: 225px; min-height: 50px; font-size: .95rem; }
+    .hero-art { width: min(100%, 500px); margin: -.3rem auto 0; }
+    .hero-art img { width: 100%; max-width: 480px; }
+    .floating-heart-one { top: 48%; left: 4%; font-size: 2rem; }
+    .floating-heart-two { top: 39%; right: 5%; }
+    .floating-heart-three { bottom: 2%; left: 9%; font-size: 1.9rem; }
+    .floating-heart-four { bottom: 4%; right: 9%; font-size: 1.8rem; }
+    .features { width: min(calc(100% - 1.7rem), 480px); margin-top: .35rem; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .15rem .5rem; }
+    .feature-card { min-height: 185px; padding-top: .85rem; }
+    .feature-icon { width: 40px; height: 40px; }
+    .feature-title { font-size: 1.5rem; }
+    .feature-copy { margin-top: .5rem; font-size: .83rem; }
+    .heartfelt-row { width: 100%; margin-top: .6rem; padding: 1.4rem 1.3rem 1.7rem; grid-template-columns: 1fr; gap: 1.55rem; }
+    .heartfelt-note { text-align: center; }
+    .heartfelt-note h2 { font-size: 3.3rem; }
+    .note-underline { width: 145px; margin: .5rem auto 1rem; }
+    .heartfelt-note > p:not(.birthday-signoff):not(.signature) { font-size: .96rem; line-height: 1.8; }
+    .birthday-signoff { font-size: 1.9rem; }
+    .music-player { max-width: 440px; min-height: 0; margin: 0 auto; padding: 1.25rem 1.25rem 1.1rem; border-radius: 23px; }
+    .player-heading { min-height: 82px; }
+    .album-art { width: 78px; height: 78px; flex-basis: 78px; border-radius: 14px; }
+    .playlist-title { font-size: 1.4rem; }
+    .playlist-subtitle { font-size: .73rem; }
+    .track-name { font-size: .68rem; }
+    .player-progress { margin-top: .9rem; }
+    .player-controls { gap: .25rem; }
+    .control-button { width: 32px; }
+    .control-button svg { width: 21px; height: 21px; }
+    .play-button { width: 60px; height: 60px; flex-basis: 60px; }
+    .site-footer { min-height: 130px; padding-bottom: 1.8rem; font-size: .82rem; }
 }
 
-.music-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
+@media (max-width: 370px) {
+    .site-header { padding-inline: .8rem; }
+    .brand { font-size: 1.45rem; }
+    .hero { padding-inline: .85rem; }
+    .eyebrow { font-size: .73rem; }
+    .hero-copy { font-size: .9rem; }
+    .feature-card { min-height: 175px; }
+    .feature-copy { font-size: .78rem; }
+    .heartfelt-row { padding-inline: 1rem; }
+    .music-player { padding-inline: .9rem; }
+    .player-heading { gap: .6rem; }
+    .album-art { width: 70px; height: 70px; flex-basis: 70px; }
+    .playlist-title { font-size: 1.27rem; }
 }
 
-.control-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-}
-
-.control-btn:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.play-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #d81b60, #f48fb1);
-    color: white;
-    border: none;
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.play-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
-}
-
-.music-footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #880e4f;
-    font-weight: 400;
-    font-style: italic;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 2rem;
-    margin-top: 3rem;
-}
-
-.footer-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.3rem;
-    color: #d81b60;
-    font-weight: 700;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .header {
-        padding: 1rem 1.5rem;
-    }
-
-    .header-title {
-        font-size: 1.3rem;
-    }
-
-    .hero {
-        flex-direction: column;
-        padding: 2rem 1.5rem;
-        text-align: center;
-    }
-
-    .hero-content {
-        max-width: 100%;
-    }
-
-    .hero-title {
-        font-size: 3rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.5rem;
-    }
-
-    .hero-images {
-        max-width: 100%;
-        margin-top: 2rem;
-    }
-
-    .hero-main-image {
-        max-height: 350px;
-    }
-
-    .cards-section {
-        grid-template-columns: 1fr;
-        padding: 2rem 1.5rem;
-    }
-
-    .content-row {
-        flex-direction: column;
-        padding: 2rem 1.5rem;
-    }
-
-    .just-for-you {
-        text-align: center;
-        padding: 2rem;
-    }
-
-    .just-for-you-title {
-        font-size: 2.5rem;
-    }
-
-    .just-for-you-text {
-        font-size: 1rem;
-    }
-
-    .music-player {
-        max-width: 100%;
-        margin: 0;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.3rem;
-    }
-
-    .hero-text {
-        font-size: 1rem;
-    }
-
-    .title-heart {
-        font-size: 1.5rem;
-    }
-
-    .card-icon {
-        font-size: 2.5rem;
-    }
-
-    .card-title {
-        font-size: 1.5rem;
-    }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
