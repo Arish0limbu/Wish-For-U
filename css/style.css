@@ -77,8 +77,8 @@ img { max-width: 100%; }
 .menu-panel a:hover, .menu-panel a:focus-visible { background: #fbe4e7; outline: none; }
 
 .page-shell { width: min(calc(100% - 2rem), 1020px); margin: 0 auto; padding: .5rem 0 3.5rem; }
-.page-return { display: inline-flex; align-items: center; gap: .45rem; margin: 0 0 1.1rem .25rem; color: #a05d68; font-size: .86rem; text-decoration: none; transition: color .2s, transform .2s; }
-.page-return:hover { color: var(--berry); transform: translateX(-3px); }
+.page-return { display: inline-flex; align-items: center; gap: .45rem; margin: 0 0 1.1rem .25rem; padding: .52rem .85rem; border: 1px solid rgba(177, 76, 99, .2); border-radius: 999px; color: #914858; background: rgba(255, 249, 248, .78); box-shadow: 0 4px 12px rgba(104, 40, 56, .08); font-size: .86rem; font-weight: 500; text-decoration: none; transition: color .2s, transform .2s, background .2s, box-shadow .2s; }
+.page-return:hover { color: var(--berry); background: #fff4f5; box-shadow: 0 6px 16px rgba(104, 40, 56, .12); transform: translateX(-3px); }
 .page-heading { max-width: 780px; margin: 0 auto 2rem; text-align: center; }
 .page-kicker { margin: 0 0 .65rem; color: #a75968; font-size: .75rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
 .page-title { margin: 0; color: var(--berry); font: 400 clamp(3.1rem, 8vw, 5rem)/1.05 'Great Vibes', 'Dancing Script', cursive; }
