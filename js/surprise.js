@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const stage = document.querySelector('.surprise-stage');
     const confetti = document.getElementById('surprise-confetti');
     const reset = document.getElementById('reset-surprise');
+    const video = document.getElementById('surprise-video-player');
+    const videoUrl = 'https://www.youtube-nocookie.com/embed/jQMCRwKOgZM?autoplay=1&rel=0';
 
     function makeHearts() {
         confetti.replaceChildren();
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     button.addEventListener('click', function () {
         content.hidden = false;
+        video.src = videoUrl;
         stage.classList.add('is-open');
         button.setAttribute('aria-expanded', 'true');
         button.hidden = true;
@@ -30,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     reset.addEventListener('click', function () {
         content.hidden = true;
+        video.src = 'about:blank';
         stage.classList.remove('is-open');
         button.hidden = false;
         button.setAttribute('aria-expanded', 'false');
