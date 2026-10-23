@@ -96,52 +96,23 @@ body::before {
 .hero-images {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
 }
 
 .hero-image-wrapper {
     position: relative;
+    width: 100%;
 }
 
 .hero-main-image {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(216, 27, 96, 0.2);
-}
-
-.hero-small-images {
-    display: flex;
-    gap: 1rem;
-}
-
-.hero-small-image {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(216, 27, 96, 0.15);
-}
-
-.hero-card {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 1rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(216, 27, 96, 0.1);
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero-card-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1rem;
-    color: #d81b60;
-    text-align: center;
+    max-height: 450px;
 }
 
 /* Cards Section */
@@ -409,11 +380,11 @@ body::before {
 
     .hero-images {
         max-width: 100%;
-        align-items: center;
+        margin-top: 2rem;
     }
 
     .hero-main-image {
-        height: 250px;
+        max-height: 350px;
     }
 
     .cards-section {
