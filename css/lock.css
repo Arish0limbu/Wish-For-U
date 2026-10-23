@@ -58,14 +58,16 @@ body::before {
 }
 
 .heart-lock-icon {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
 }
 
 .heart-lock-icon img {
-    width: 80px;
+    width: 120px;
     height: auto;
     animation: heartbeat 1.5s ease-in-out infinite;
     transition: all 0.5s ease;
+    filter: drop-shadow(0 5px 15px rgba(216, 27, 96, 0.3));
 }
 
 .heart-lock-icon.unlocked img {
@@ -75,9 +77,11 @@ body::before {
 @keyframes heartbeat {
     0%, 100% {
         transform: scale(1);
+        filter: drop-shadow(0 5px 15px rgba(216, 27, 96, 0.3));
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.15);
+        filter: drop-shadow(0 8px 25px rgba(216, 27, 96, 0.5));
     }
 }
 
@@ -191,6 +195,38 @@ body::before {
     font-weight: 400;
 }
 
+.hint-message {
+    display: none;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: #d81b60;
+    margin: 1rem 0;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    border: 2px solid #d81b60;
+    animation: hintBounce 0.5s ease;
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
+}
+
+.hint-message.show {
+    display: inline-block;
+}
+
+@keyframes hintBounce {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(-10px);
+    }
+    50% {
+        transform: scale(1.05) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 .keypad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -205,8 +241,8 @@ body::before {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    border: 2px solid #d81b60;
-    background: rgba(255, 255, 255, 0.8);
+    border: 3px solid #d81b60;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
     color: #d81b60;
     font-size: 1.5rem;
     font-weight: 500;
@@ -216,14 +252,14 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
+    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .key:hover {
-    background: #d81b60;
+    background: linear-gradient(135deg, #d81b60, #f48fb1);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(216, 27, 96, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(216, 27, 96, 0.4);
 }
 
 .key:active {
@@ -322,6 +358,7 @@ body::before {
     background: url('../images/hearts/small-heart.png') no-repeat center;
     background-size: contain;
     opacity: 0.6;
+    animation: float 3s ease-in-out infinite;
 }
 
 .lock-screen::after {
@@ -334,6 +371,16 @@ body::before {
     background: url('../images/hearts/smaller-heart.png') no-repeat center;
     background-size: contain;
     opacity: 0.6;
+    animation: float 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* Mobile responsive */
@@ -347,7 +394,7 @@ body::before {
     }
 
     .heart-lock-icon img {
-        width: 70px;
+        width: 100px;
     }
 
     .key {
@@ -359,6 +406,11 @@ body::before {
     .keypad {
         gap: 0.75rem;
         max-width: 240px;
+    }
+
+    .hint-message {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.2rem;
     }
 }
 
@@ -372,7 +424,7 @@ body::before {
     }
 
     .heart-lock-icon img {
-        width: 90px;
+        width: 140px;
     }
 
     .key {

@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPin = '';
         updatePinDisplay();
         removeErrorState();
+        hideHint();
     }
 
     function updatePinDisplay() {
@@ -136,9 +137,14 @@ document.addEventListener('DOMContentLoaded', function() {
             dot.classList.add('error');
         });
 
+        // Show hint message
+        const hintMessage = document.querySelector('.hint-message');
+        hintMessage.classList.add('show');
+
         setTimeout(() => {
             removeErrorState();
-        }, 1500);
+            hintMessage.classList.remove('show');
+        }, 2500);
     }
 
     function removeErrorState() {
@@ -146,6 +152,11 @@ document.addEventListener('DOMContentLoaded', function() {
             dot.classList.remove('error');
             dot.classList.remove('success');
         });
+    }
+
+    function hideHint() {
+        const hintMessage = document.querySelector('.hint-message');
+        hintMessage.classList.remove('show');
     }
 
     // Add keyboard support
