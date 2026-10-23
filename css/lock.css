@@ -8,9 +8,6 @@ body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 50%, #ffd1dc 100%);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: relative;
     overflow: hidden;
 }
@@ -36,10 +33,19 @@ body::before {
     position: relative;
     z-index: 1;
     transition: all 0.8s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 .lock-screen.unlocking {
     animation: unlockScreen 0.8s ease forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes unlockScreen {
@@ -60,6 +66,7 @@ body::before {
 .heart-lock-icon {
     margin-bottom: 2rem;
     position: relative;
+    align-self: center;
 }
 
 .heart-lock-icon img {
@@ -208,7 +215,7 @@ body::before {
     border: 2px solid #d81b60;
     animation: hintBounce 0.5s ease;
     box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
-    max-width: 200px;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -293,11 +300,17 @@ body::before {
     font-size: 2.5rem;
     font-weight: 700;
     color: #d81b60;
-    margin-top: 2rem;
+    margin: 2rem auto;
     animation: fadeInUp 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 2px 2px 8px rgba(216, 27, 96, 0.3);
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
 }
 
 .success-message.show {
@@ -307,11 +320,11 @@ body::before {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translate(-50%, -50%) scale(0.8);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
@@ -394,6 +407,7 @@ body::before {
 @media (max-width: 480px) {
     .lock-screen {
         padding: 1.5rem;
+        min-height: 100vh;
     }
 
     .title {
@@ -419,6 +433,10 @@ body::before {
         font-size: 0.85rem;
         padding: 0.5rem 1rem;
         max-width: 180px;
+    }
+
+    .success-message {
+        font-size: 2rem;
     }
 }
 
