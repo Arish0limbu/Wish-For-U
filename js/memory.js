@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     const pairs = [
-        { you: 'IMG-20240617-WA0002.jpg', us: 'IMG-20241203-WA0009.jpg', youCaption: 'A little moment we shared', usCaption: 'Another memory of us', title: 'From one shared moment to another', text: 'Two photos of us, connected by all the little moments in between.' },
-        { you: 'IMG-20241203-WA0001.jpg', us: 'IMG-20241203-WA0011.jpg', youCaption: 'Side by side', usCaption: 'A day to remember', title: 'Two frames, one story', text: 'A pair of memories from the time we have spent together.' },
-        { you: 'IMG_20250217_060210.jpg', us: 'IMG_20250311_153100.jpg', youCaption: 'A favorite moment together', usCaption: 'Another little adventure', title: 'A little closer', text: 'Every photo holds a small piece of our story.' },
-        { you: 'IMG_20250402_215557.jpg', us: 'IMG_20250424_210033.jpg', youCaption: 'One shared chapter', usCaption: 'A memory to keep', title: 'One moment finds another', text: 'Different days, tied together by all the moments between them.' },
-        { you: 'IMG_20250527_165106.jpg', us: 'IMG_20250830_160907.jpg', youCaption: 'A photo to come back to', usCaption: 'Us making another memory', title: 'A favorite kind of connection', text: 'Two snapshots from the story we keep making together.' },
-        { you: 'IMG-20251023-WA0011.jpg', us: 'Snapchat-2102383121.jpg', youCaption: 'A smile we shared', usCaption: 'One for the scrapbook', title: 'The story keeps going', text: 'A reminder that the best memories are the ones we make together.' }
+        { you: 'IMG-20240617-WA0002.jpg', us: 'IMG-20241203-WA0009.jpg', youCaption: 'Hami le saath bitayeko sano pal', usCaption: 'Hamro arko mitho samjhana', title: 'From one shared moment to another', text: 'Yi dui tasbir bich hami le saath bitayeka anek sano sano pal haru jodiyeka chhan.' },
+        { you: 'IMG-20241203-WA0001.jpg', us: 'IMG-20241203-WA0011.jpg', youCaption: 'Sangai bitayeko pal', usCaption: 'Sadhai samjhana rahane din', title: 'Two frames, one story', text: 'Hami le saath bitayeka samayaka dui mitho samjhanaharu.' },
+        { you: 'IMG_20250217_060210.jpg', us: 'IMG_20250311_153100.jpg', youCaption: 'Sangai bitayeko manparne pal', usCaption: 'Hamro arko sano yatra', title: 'A little closer', text: 'Harek tasbirle hamro kathako euta sano ansh bokeko chha.' },
+        { you: 'IMG_20250402_215557.jpg', us: 'IMG_20250424_210033.jpg', youCaption: 'Hami le saath lekheko adhyay', usCaption: 'Sambhalera rakhne samjhana', title: 'One moment finds another', text: 'Faraka dinharu, bichma bitayeka palharule jodiyeka chhan.' },
+        { you: 'IMG_20250527_165106.jpg', us: 'IMG_20250830_160907.jpg', youCaption: 'Feri herna man lagne tasbir', usCaption: 'Hami le banaudai gareko arko samjhana', title: 'A favorite kind of connection', text: 'Hami le saath banaudai gareko kathaka dui mitho jhalak.' },
+        { you: 'IMG-20251023-WA0011.jpg', us: 'Snapchat-2102383121.jpg', youCaption: 'Hami le saath baadeko muskan', usCaption: 'Samjhanama rakhne euta pal', title: 'The story keeps going', text: 'Sabai bhanda mitho samjhana hami le saath banaune palharu nai hun.' }
     ];
 
     const stage = document.getElementById('memory-pair');
@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', function () {
             usCaption.textContent = pair.usCaption;
             title.textContent = pair.title;
             description.textContent = pair.text;
+            youCaption.lang = 'ne-Latn';
+            usCaption.lang = 'ne-Latn';
+            description.lang = 'ne-Latn';
             counter.innerHTML = String(current + 1).padStart(2, '0') + ' <span>/ ' + String(pairs.length).padStart(2, '0') + '</span>';
             Array.from(dots.children).forEach(function (dot, dotIndex) {
                 dot.setAttribute('aria-current', String(dotIndex === current));

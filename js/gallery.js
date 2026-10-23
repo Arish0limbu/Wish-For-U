@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
         'IMG_20250527_165106.jpg', 'IMG_20250830_160907.jpg', 'IMG-20240617-WA0002.jpg', 'IMG-20241203-WA0001.jpg',
         'IMG-20241203-WA0009.jpg', 'IMG-20241203-WA0011.jpg', 'IMG-20251023-WA0011.jpg', 'Snapchat-2102383121.jpg'
     ];
-    const herCaptions = ['A little moment of you', 'A smile to keep', 'One of your lovely days', 'A favorite frame', 'Just being you', 'A moment in your own light'];
-    const usCaptions = ['A memory we share', 'Together in a favorite frame', 'One for the scrapbook', 'A little moment for us', 'A day worth keeping', 'A photo to come back to'];
+    const herCaptions = ['Timro euta mitho pal', 'Sambhalera rakhne muskan', 'Timro euta sundar din', 'Manparne tasbir', 'Timi jastai pyari', 'Timro ujyaalo pal'];
+    const usCaptions = ['Hami le saath baadeko samjhana', 'Hami sangai ko manparne tasbir', 'Samjhanako kitabma rakhne pal', 'Hamro lagi euta sano pal', 'Sambhalera rakhne din', 'Feri herna man lagne tasbir'];
     const photos = [];
     herPhotos.forEach(function (file, index) { photos.push({ src: 'images/herpic/' + file, group: 'her', caption: herCaptions[index % herCaptions.length], alt: 'A photo from the personal album' }); });
     usPhotos.forEach(function (file, index) { photos.push({ src: 'images/ourpic/' + file, group: 'us', caption: usCaptions[index % usCaptions.length], alt: 'A photo of the two of you together' }); });
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
             image.decoding = 'async';
             const caption = document.createElement('div');
             caption.className = 'memory-caption';
+            caption.lang = 'ne-Latn';
             const title = document.createElement('span');
             title.textContent = photo.caption;
             const marker = document.createElement('span');
@@ -92,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
         lightboxImage.src = photo.src;
         lightboxImage.alt = photo.alt;
         lightboxCaption.textContent = photo.caption + (photo.group === 'her' ? ' · just you' : ' · together');
+        lightboxCaption.lang = 'ne-Latn';
     }
     function openPhoto(index) { activeIndex = index; slideIndex = index; updateSlideshow(false); showCurrentPhoto(); if (!dialog.open) dialog.showModal(); }
     function movePhoto(step) { activeIndex = (activeIndex + step + visiblePhotos.length) % visiblePhotos.length; slideIndex = activeIndex; updateSlideshow(true); showCurrentPhoto(); }
